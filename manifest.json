@@ -1,110 +1,80 @@
 {
     "name": "CraftMath",
     "short_name": "CraftMath",
-    "description": "Interactive educational game for learning multiplication tables in pixel art style",
+    "description": "Interaktywna gra edukacyjna do nauki tabliczki mnożenia w stylu pikselowym",
     "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#5c5c5c",
     "theme_color": "#2d2d2d",
     "orientation": "portrait-primary",
-    "categories": ["education", "games"],
-    "lang": "en",
-    "dir": "ltr",
-    "prefer_related_applications": true,
-    "related_applications": [
-        {
-            "platform": "play",
-            "url": "https://play.google.com/store/apps/details?id=com.pawelbcn.craftmath",
-            "id": "com.pawelbcn.craftmath"
-        },
-        {
-            "platform": "itunes",
-            "url": "https://apps.apple.com/app/craftmath/id123456789"
-        }
+    "icons": [
+      {
+        "src": "icons/icon-72x72.png",
+        "sizes": "72x72",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "icons/icon-96x96.png",
+        "sizes": "96x96",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "icons/icon-128x128.png",
+        "sizes": "128x128",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "icons/icon-144x144.png",
+        "sizes": "144x144",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "icons/icon-152x152.png",
+        "sizes": "152x152",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "icons/icon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "icons/icon-384x384.png",
+        "sizes": "384x384",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "icons/icon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
     ],
     "screenshots": [
-        {
-            "src": "screenshots/narrow-1.png",
-            "sizes": "750x1334",
-            "type": "image/png",
-            "platform": "narrow",
-            "label": "Learning Mode"
-        },
-        {
-            "src": "screenshots/narrow-2.png",
-            "sizes": "750x1334",
-            "type": "image/png",
-            "platform": "narrow",
-            "label": "Game Mode"
-        },
-        {
-            "src": "screenshots/wide-1.png",
-            "sizes": "1334x750",
-            "type": "image/png",
-            "platform": "wide",
-            "label": "Leaderboard"
-        }
+      {
+        "src": "screenshots/narrow-1.png",
+        "sizes": "750x1334",
+        "type": "image/png"
+      },
+      {
+        "src": "screenshots/narrow-2.png",
+        "sizes": "750x1334",
+        "type": "image/png"
+      },
+      {
+        "src": "screenshots/wide-1.png",
+        "sizes": "1334x750",
+        "type": "image/png"
+      }
     ],
-    "icons": [
-        {
-            "src": "icons/icon-72x72.png",
-            "sizes": "72x72",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "icons/icon-96x96.png",
-            "sizes": "96x96",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "icons/icon-128x128.png",
-            "sizes": "128x128",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "icons/icon-144x144.png",
-            "sizes": "144x144",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "icons/icon-152x152.png",
-            "sizes": "152x152",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "icons/icon-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "icons/icon-384x384.png",
-            "sizes": "384x384",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "icons/icon-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any maskable"
-        }
-    ],
-    "shortcuts": [
-        {
-            "name": "Learning Mode",
-            "url": "/index.html?mode=learning",
-            "icons": [{ "src": "icons/icon-96x96.png", "sizes": "96x96" }]
-        },
-        {
-            "name": "Game Mode",
-            "url": "/index.html?mode=game",
-            "icons": [{ "src": "icons/icon-96x96.png", "sizes": "96x96" }]
-        }
-    ]
+    "categories": ["education", "games"],
+    "lang": "pl",
+    "dir": "ltr"
 }
