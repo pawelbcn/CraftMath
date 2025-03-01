@@ -2,7 +2,6 @@ const CACHE_NAME = 'craftmath-v1';
 const ASSETS = [
   './',
   './index.html',
-  './gra.html',
   './offline.html',
   './translations.js',
   './manifest.json',

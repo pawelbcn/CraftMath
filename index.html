@@ -1,27 +1,29 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CraftMath - Tabliczka Mnożenia</title>
-    <meta name="description" content="Interaktywna gra edukacyjna do nauki tabliczki mnożenia w stylu pikselowym.">
+    <title>CraftMath - Multiplication Tables</title>
+    <meta name="description" content="Interactive educational game for learning multiplication tables in pixel art style.">
     <meta name="author" content="Pawel Marciniak">
-    <!-- Przekierowanie do głównego pliku gry -->
-    <meta http-equiv="refresh" content="0; url=gra.html">
     <link rel="manifest" href="manifest.json">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="CraftMath">
-<link rel="apple-touch-icon" href="icons/icon-152x152.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="CraftMath">
+    <link rel="apple-touch-icon" href="icons/icon-152x152.png">
+    <script src="translations.js"></script>
+    <style>
+        // ... existing code from gra.html ...
+    </style>
 </head>
 <body>
-    <p>Przekierowywanie do gry CraftMath...</p>
+    // ... existing code from gra.html ...
     <script>
         if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('Service Worker registered'))
-            .catch(err => console.log('Service Worker registration failed', err));
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.log('Service Worker registration failed', err));
         }
-      </script>
+    </script>
 </body>
 </html>
