@@ -20,6 +20,7 @@ const translations = {
         saveScore: "SAVE SCORE",
         scoreSaved: "Score saved!",
         leaderboardTitle: "TOP SCORES",
+        noScores: "No scores recorded yet.",
         rank: "Rank",
         player: "Player",
         score: "Score",
@@ -39,7 +40,8 @@ const translations = {
         goodJob: "Good job! Keep practicing!",
         keepTrying: "Keep trying! It gets better with practice!",
         finalScore: "Your score: {score} out of {total} points!",
-        githubLink: "Code on GitHub"
+        githubLink: "Code on GitHub",
+        howMuch: "How much is"
     },
     pl: {
         title: "TABLICZKA MNOŻENIA",
@@ -62,6 +64,7 @@ const translations = {
         saveScore: "ZAPISZ WYNIK",
         scoreSaved: "Wynik zapisany!",
         leaderboardTitle: "NAJLEPSZE WYNIKI",
+        noScores: "Brak zapisanych wyników.",
         rank: "Lp.",
         player: "Gracz",
         score: "Punkty",
@@ -81,7 +84,8 @@ const translations = {
         goodJob: "Dobra robota! Ćwicz dalej!",
         keepTrying: "Próbuj dalej! Z każdym razem będzie lepiej!",
         finalScore: "Twój wynik: {score} z {total} punktów!",
-        githubLink: "Kod na GitHub"
+        githubLink: "Kod na GitHub",
+        howMuch: "Ile to"
     },
     zh: {
         title: "乘法表",
@@ -104,6 +108,7 @@ const translations = {
         saveScore: "保存分数",
         scoreSaved: "分数已保存！",
         leaderboardTitle: "最高分",
+        noScores: "No scores recorded yet.",
         rank: "排名",
         player: "玩家",
         score: "分数",
@@ -123,7 +128,8 @@ const translations = {
         goodJob: "干得好！继续练习！",
         keepTrying: "继续努力！熟能生巧！",
         finalScore: "你的得分：{total}分中的{score}分！",
-        githubLink: "GitHub上的代码"
+        githubLink: "GitHub上的代码",
+        howMuch: "多少是"
     },
     hi: {
         title: "पहाड़े",
@@ -146,6 +152,7 @@ const translations = {
         saveScore: "स्कोर सेव करें",
         scoreSaved: "स्कोर सेव हो गया!",
         leaderboardTitle: "टॉप स्कोर",
+        noScores: "No scores recorded yet.",
         rank: "रैंक",
         player: "खिलाड़ी",
         score: "स्कोर",
@@ -165,7 +172,8 @@ const translations = {
         goodJob: "बहुत अच्छा! अभ्यास जारी रखें!",
         keepTrying: "प्रयास करते रहें! अभ्यास से सुधार होगा!",
         finalScore: "आपका स्कोर: {total} में से {score} अंक!",
-        githubLink: "GitHub पर कोड"
+        githubLink: "GitHub पर कोड",
+        howMuch: "कितना होता है"
     },
     es: {
         title: "TABLAS DE MULTIPLICAR",
@@ -188,6 +196,7 @@ const translations = {
         saveScore: "GUARDAR PUNTAJE",
         scoreSaved: "¡Puntaje guardado!",
         leaderboardTitle: "MEJORES PUNTAJES",
+        noScores: "No scores recorded yet.",
         rank: "Posición",
         player: "Jugador",
         score: "Puntaje",
@@ -207,7 +216,8 @@ const translations = {
         goodJob: "¡Buen trabajo! ¡Sigue practicando!",
         keepTrying: "¡Sigue intentando! ¡Mejorará con la práctica!",
         finalScore: "Tu puntaje: ¡{score} de {total} puntos!",
-        githubLink: "Código en GitHub"
+        githubLink: "Código en GitHub",
+        howMuch: "¿Cuánto es"
     },
     ar: {
         title: "جدول الضرب",
@@ -230,6 +240,7 @@ const translations = {
         saveScore: "حفظ النتيجة",
         scoreSaved: "تم حفظ النتيجة!",
         leaderboardTitle: "أعلى النتائج",
+        noScores: "No scores recorded yet.",
         rank: "المرتبة",
         player: "اللاعب",
         score: "النتيجة",
@@ -249,7 +260,8 @@ const translations = {
         goodJob: "عمل جيد! واصل التدرب!",
         keepTrying: "واصل المحاولة! ستتحسن مع التدريب!",
         finalScore: "نتيجتك: {score} من {total} نقطة!",
-        githubLink: "الكود على GitHub"
+        githubLink: "الكود على GitHub",
+        howMuch: "كم يساوي"
     },
     bn: {
         title: "নামতা",
@@ -272,6 +284,7 @@ const translations = {
         saveScore: "স্কোর সংরক্ষণ করুন",
         scoreSaved: "স্কোর সংরক্ষিত হয়েছে!",
         leaderboardTitle: "সেরা স্কোর",
+        noScores: "No scores recorded yet.",
         rank: "র‍্যাঙ্ক",
         player: "খেলোয়াড়",
         score: "স্কোর",
@@ -291,7 +304,8 @@ const translations = {
         goodJob: "ভালো কাজ! অনুশীলন চালিয়ে যান!",
         keepTrying: "চেষ্টা করতে থাকুন! অনুশীলনে উন্নতি হবে!",
         finalScore: "আপনার স্কোর: {total} এর মধ্যে {score} পয়েন্ট!",
-        githubLink: "GitHub এ কোড"
+        githubLink: "GitHub এ কোড",
+        howMuch: "কত হয়"
     },
     fr: {
         title: "TABLES DE MULTIPLICATION",
@@ -314,6 +328,7 @@ const translations = {
         saveScore: "SAUVEGARDER LE SCORE",
         scoreSaved: "Score sauvegardé !",
         leaderboardTitle: "MEILLEURS SCORES",
+        noScores: "No scores recorded yet.",
         rank: "Rang",
         player: "Joueur",
         score: "Score",
@@ -333,7 +348,8 @@ const translations = {
         goodJob: "Bon travail ! Continuez à pratiquer !",
         keepTrying: "Continuez d'essayer ! Ça s'améliore avec la pratique !",
         finalScore: "Votre score : {score} sur {total} points !",
-        githubLink: "Code sur GitHub"
+        githubLink: "Code sur GitHub",
+        howMuch: "Combien fait"
     },
     de: {
         title: "EINMALEINS",
@@ -356,6 +372,7 @@ const translations = {
         saveScore: "PUNKTZAHL SPEICHERN",
         scoreSaved: "Punktzahl gespeichert!",
         leaderboardTitle: "BESTENLISTE",
+        noScores: "No scores recorded yet.",
         rank: "Rang",
         player: "Spieler",
         score: "Punkte",
@@ -375,7 +392,8 @@ const translations = {
         goodJob: "Gut gemacht! Übe weiter!",
         keepTrying: "Bleib dran! Es wird mit der Übung besser!",
         finalScore: "Deine Punktzahl: {score} von {total} Punkten!",
-        githubLink: "Code auf GitHub"
+        githubLink: "Code auf GitHub",
+        howMuch: "Wie viel ist"
     },
     it: {
         title: "TABELLINE",
@@ -398,6 +416,7 @@ const translations = {
         saveScore: "SALVA PUNTEGGIO",
         scoreSaved: "Punteggio salvato!",
         leaderboardTitle: "MIGLIORI PUNTEGGI",
+        noScores: "No scores recorded yet.",
         rank: "Posizione",
         player: "Giocatore",
         score: "Punteggio",
@@ -417,7 +436,8 @@ const translations = {
         goodJob: "Ottimo lavoro! Continua a esercitarti!",
         keepTrying: "Continua a provare! Migliorerai con la pratica!",
         finalScore: "Il tuo punteggio: {score} su {total} punti!",
-        githubLink: "Codice su GitHub"
+        githubLink: "Codice su GitHub",
+        howMuch: "Quanto fa"
     },
     pt: {
         title: "TABUADA",
@@ -440,6 +460,7 @@ const translations = {
         saveScore: "SALVAR PONTUAÇÃO",
         scoreSaved: "Pontuação salva!",
         leaderboardTitle: "MELHORES PONTUAÇÕES",
+        noScores: "No scores recorded yet.",
         rank: "Posição",
         player: "Jogador",
         score: "Pontuação",
@@ -459,7 +480,8 @@ const translations = {
         goodJob: "Bom trabalho! Continue praticando!",
         keepTrying: "Continue tentando! Melhora com a prática!",
         finalScore: "Sua pontuação: {score} de {total} pontos!",
-        githubLink: "Código no GitHub"
+        githubLink: "Código no GitHub",
+        howMuch: "Quanto é"
     },
     nl: {
         title: "TAFELS VAN VERMENIGVULDIGING",
@@ -482,6 +504,7 @@ const translations = {
         saveScore: "SCORE OPSLAAN",
         scoreSaved: "Score opgeslagen!",
         leaderboardTitle: "TOPSCORES",
+        noScores: "No scores recorded yet.",
         rank: "Rang",
         player: "Speler",
         score: "Score",
@@ -501,6 +524,7 @@ const translations = {
         goodJob: "Goed werk! Blijf oefenen!",
         keepTrying: "Blijf proberen! Het wordt beter met oefening!",
         finalScore: "Je score: {score} van de {total} punten!",
-        githubLink: "Code op GitHub"
+        githubLink: "Code op GitHub",
+        howMuch: "Hoeveel is"
     }
 }; 

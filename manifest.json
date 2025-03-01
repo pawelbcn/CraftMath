@@ -1,11 +1,11 @@
 {
     "name": "CraftMath",
     "short_name": "CraftMath",
-    "description": "Interaktywna gra edukacyjna do nauki tabliczki mnożenia w stylu pikselowym",
-    "start_url": "./index.html",
+    "description": "Interactive educational game for learning multiplication tables in pixel art style",
+    "start_url": "/gra.html",
     "display": "standalone",
-    "background_color": "#5c5c5c",
-    "theme_color": "#2d2d2d",
+    "background_color": "#8b8b8b",
+    "theme_color": "#5c5c5c",
     "orientation": "portrait-primary",
     "icons": [
       {
