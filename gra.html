@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CraftMath: Tabliczka Mnożenia</title>
+    <title>CraftMath: Multiplication Tables</title>
+    <script src="translations.js"></script>
     <style>
         @font-face {
             font-family: 'PixelFont';
@@ -351,11 +352,90 @@
             color: #9fec39;
             text-decoration: underline;
         }
+        /* Add new styles for language selection */
+        .language-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .language-title {
+            color: #ffff55;
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+        
+        .language-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .language-button {
+            width: 150px;
+            height: 100px;
+            cursor: pointer;
+            border: 4px solid #2d2d2d;
+            transition: all 0.2s;
+            background-color: #546454;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+        
+        .language-button:hover {
+            transform: translateY(-5px);
+            background-color: #48a248;
+        }
+        
+        .language-button.active {
+            border-color: #ffff55;
+        }
+        
+        .flag-image {
+            width: 60px;
+            height: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .language-name {
+            color: white;
+            font-size: 16px;
+            text-shadow: 2px 2px #000000;
+        }
+        
+        /* Add language selector to the top right corner */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .language-switch {
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            border: 2px solid #2d2d2d;
+            transition: transform 0.2s;
+        }
+        
+        .language-switch:hover {
+            transform: translateY(-2px);
+        }
+        
+        .language-switch.active {
+            border: 2px solid #ffff55;
+        }
     </style>
 </head>
 <body>
     <div class="game-container" id="game-container">
-        <!-- Zostanie wypełnione przez JS -->
+        <!-- Content will be filled by JavaScript -->
     </div>
 
     <script>
@@ -371,22 +451,89 @@
         let leaderboard = []; // Tablica wyników
         
         // Dźwięki
-        const correctSound = new Audio("data:audio/wav;base64,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");
+        const correctSound = new Audio("data:audio/wav;base64,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");
         const wrongSound = new Audio("data:audio/wav;base64,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");
         const clickSound = new Audio("data:audio/wav;base64,UklGRswCAABXQVZFZm10IBAAAAABAAEARKwAAESsAAACABAAZGF0YagCAAAiIiIpKSkzMzM+Pj5ISEhQUFBWVlZaWlpeXl5gYGBiYmJiYmJiYmJhYWFgYGBeXl5cXFxZWVlVVVVRUVFMTExGRkZAQEA5OTkyMjIrKyskJCQeHh4YGBgSEhINDQ0ICAgFBQUCAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgIFBQUICAgNDQ0SEhIYGBgeHh4kJCQrKysyMjI5OTlAQEBGRkZMTExRUVFVVVVZWVlcXFxeXl5gYGBhYWFiYmJiYmJiYmJgYGBeXl5aWlpWVlZQUFBISEg+Pj4zMzMpKSkiIiIcHBwVFRUPDw8KCgoGBgYDAwMBAQEAAAAAAAAAAAAAAAAAAAAAAAABAQEDAwMGBgYKCgoPDw8VFRUcHBwiIiIpKSkzMzM+Pj5ISEhQUFBWVlZaWlpeXl5gYGBiYmJiYmJiYmJhYWFgYGBeXl5cXFxZWVlVVVVRUVFMTExGRkZAQEA5OTkyMjIrKyskJCQeHh4YGBgSEhINDQ0ICAgFBQUCAgIAAAAAAAAAAAAAAAAAAAAAAAACAgIFBQUICAgNDQ0SEhIYGBgeHh4kJCQrKysyMjI5OTlAQEBGRkZMTExRUVFVVVVZWVlcXFxeXl5gYGBhYWFiYmJiYmJiYmJgYGBeXl5aWlpWVlZQUFBISEg+Pj4zMzMpKSkiIiIcHBwVFRUPDw8KCgoGBgYDAwMBAQEAAAAAAAAAAAAAAAAAAAAAAAABAQEDAwMGBgYKCgoPDw8VFRX/////////////////////");
 
+        // Add language selection functionality
+        let currentLang = localStorage.getItem('craftmath-lang') || 'en';
+        
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('craftmath-lang', lang);
+            document.documentElement.lang = lang;
+            if (currentScreen === 'language-select') {
+                setTimeout(() => {
+                    currentScreen = 'start';
+                    renderStartScreen();
+                }, 500);
+            } else {
+                renderCurrentScreen();
+            }
+        }
+        
+        function renderLanguageScreen() {
+            const container = document.getElementById('game-container');
+            container.innerHTML = `
+                <div class="language-screen">
+                    <div class="minecraft-logo">CRAFTMATH</div>
+                    <div class="language-title">Select Language</div>
+                    <div class="language-buttons">
+                        <div class="language-button ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">
+                            <img src="flags/en.png" alt="English" class="flag-image">
+                            <span class="language-name">English</span>
+                        </div>
+                        <div class="language-button ${currentLang === 'pl' ? 'active' : ''}" onclick="setLanguage('pl')">
+                            <img src="flags/pl.png" alt="Polski" class="flag-image">
+                            <span class="language-name">Polski</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function addLanguageSelector() {
+            const selector = document.createElement('div');
+            selector.className = 'language-selector';
+            selector.innerHTML = `
+                <img src="flags/en.png" alt="English" class="language-switch ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">
+                <img src="flags/pl.png" alt="Polski" class="language-switch ${currentLang === 'pl' ? 'active' : ''}" onclick="setLanguage('pl')">
+            `;
+            document.body.appendChild(selector);
+        }
+        
+        function renderCurrentScreen() {
+            switch(currentScreen) {
+                case 'language-select':
+                    renderLanguageScreen();
+                    break;
+                case 'start':
+                    renderStartScreen();
+                    break;
+                case 'multiplier-select':
+                    renderMultiplierScreen();
+                    break;
+                case 'game':
+                    renderGameScreen();
+                    break;
+                case 'leaderboard':
+                    renderLeaderboard();
+                    break;
+            }
+        }
+        
         // Renderuj ekran startowy
         function renderStartScreen() {
             const container = document.getElementById('game-container');
             container.innerHTML = `
                 <div class="start-screen">
                     <div class="minecraft-logo">CRAFTMATH</div>
-                    <h1>TABLICZKA MNOŻENIA</h1>
-                    <h2>Wybierz tryb gry:</h2>
-                    <button id="learning-mode" class="mode-button">TRYB NAUKI</button>
-                    <button id="game-mode" class="mode-button">TRYB GRY</button>
-                    <button id="show-leaderboard" class="mode-button">TABLICA WYNIKÓW</button>
-                    <a href="https://github.com/pawelbcn/CraftMath" class="github-link" target="_blank">Kod na GitHub</a>
+                    <h1>${translations[currentLang].title}</h1>
+                    <h2>${translations[currentLang].chooseModeTitle}</h2>
+                    <button id="learning-mode" class="mode-button">${translations[currentLang].learningMode}</button>
+                    <button id="game-mode" class="mode-button">${translations[currentLang].gameMode}</button>
+                    <button id="show-leaderboard" class="mode-button">${translations[currentLang].leaderboard}</button>
+                    <a href="https://github.com/pawelbcn/CraftMath" class="github-link" target="_blank">${translations[currentLang].githubLink}</a>
                 </div>
             `;
             
@@ -420,15 +567,15 @@
             const container = document.getElementById('game-container');
             container.innerHTML = `
                 <div class="start-screen">
-                    <h1>TRYB NAUKI</h1>
+                    <h1>${translations[currentLang].learningMode}</h1>
                     <div class="multiplier-selection">
-                        <h3>Wybierz liczbę do nauki mnożenia:</h3>
+                        <h3>${translations[currentLang].chooseMultiplier}</h3>
                         <div class="number-grid">
                             ${generateNumberButtons()}
                         </div>
                     </div>
-                    <button id="start-learning" class="mode-button">ROZPOCZNIJ NAUKĘ</button>
-                    <button id="back-to-start" class="back-button">POWRÓT</button>
+                    <button id="start-learning" class="mode-button">${translations[currentLang].startLearning}</button>
+                    <button id="back-to-start" class="back-button">${translations[currentLang].backToStart}</button>
                 </div>
             `;
             
@@ -502,10 +649,10 @@
                     ${gameMode === 'learning' ? `<div>Mnożenie przez: <span class="multiplier">${multiplier}</span></div>` : ''}
                 </div>
                 
-                <h1>CRAFTMATH: TABLICZKA MNOŻENIA</h1>
+                <h1>${translations[currentLang].title}</h1>
                 <div class="question-container">Ile to <span id="number">1</span> × <span id="multiplier-display">${multiplier}</span> = ?</div>
                 <div class="equation ${gameMode === 'game' ? 'hidden' : ''}"><span id="sets-count">1</span> zbiorów po <span id="dots-count">${multiplier}</span> kropki</div>
-                ${gameMode === 'game' ? '<button id="hint-button" class="hint-button">POKAŻ PODPOWIEDŹ</button>' : ''}
+                ${gameMode === 'game' ? '<button id="hint-button" class="hint-button">${translations[currentLang].showHint}</button>' : ''}
                 <div class="sets-container ${gameMode === 'game' ? 'hidden' : ''}" id="sets-container"></div>
                 <div class="options-container" id="options"></div>
                 <div class="message" id="message"></div>
@@ -513,7 +660,7 @@
                 <div class="progress-container">
                     <div class="progress-bar" id="progress-bar"></div>
                 </div>
-                <button id="back-to-menu" class="back-button">POWRÓT DO MENU</button>
+                <button id="back-to-menu" class="back-button">${translations[currentLang].backToMenu}</button>
             `;
             
             // Dodaj nasłuchiwacz dla przycisku powrotu
@@ -535,11 +682,11 @@
                     if (hintsVisible) {
                         setsContainer.classList.remove('hidden');
                         equation.classList.remove('hidden');
-                        hintButton.textContent = 'UKRYJ PODPOWIEDŹ';
+                        hintButton.textContent = '${translations[currentLang].hideHint}';
                     } else {
                         setsContainer.classList.add('hidden');
                         equation.classList.add('hidden');
-                        hintButton.textContent = 'POKAŻ PODPOWIEDŹ';
+                        hintButton.textContent = '${translations[currentLang].showHint}';
                     }
                 });
             }
@@ -658,7 +805,7 @@
             if (!message) return;
             
             if (selectedOption === correctAnswer) {
-                message.textContent = 'Brawo! Dobra odpowiedź!';
+                message.textContent = '${translations[currentLang].correctAnswer}';
                 message.style.color = 'green';
                 score++;
                 correctSound.play();
@@ -669,7 +816,7 @@
                     set.style.backgroundColor = '#68b337';
                     set.style.borderColor = '#3a6b15';
                     // Dodaj efekt dźwiękowy "pop" w stylu Minecraft
-                    const popSound = new Audio("data:audio/wav;base64,UklGRqwCAABXQVZFZm10IBAAAAABAAEARKwAABCxAgAEABAAZGF0YYgCAACAgICAgICAgICAgICAgICAgICAgICAgICBgYGCgoKCg4ODg4SEhISFhYWGhoaGh4eHiIiIiImJiYmKioqLi4uLjIyMjI2NjY6Ojo+Pj5CQkJGRkZGSkpKTk5OTlJSUlZWVlZaWlpeXl5eYmJiZmZmampqam5ubnJycnZ2dnZ6enp+fn5+goKChoaGhoqKio6Ojo6SkpKWlpaWmpqampqanp6enqKioqampqaqqqqurq6usrKysra2tra2trq6urq+vr6+wsLCxsbGxsrKysrOzs7O0tLS0tbW1tbW1tra2tre3t7e4uLi4ubm5ubq6uru7u7u8vLy8vb29vb6+vr6/v7+/wMDAwMHBwcHCwsLCw8PDw8TExMTFxcXFxsbGxsfHx8fIyMjIycnJycrKysrLy8vLzMzMzM3Nzc3Ozs7Oz8/Pz9DQ0NDR0dHR0tLS0tPT09PU1NTU1dXV1dbW1tbX19fX2NjY2NnZ2dna2trb29vb3Nzc3N3d3d3e3t7e39/f3+Dg4ODh4eHh4uLi4uPj4+Pk5OTk5eXl5ebm5ubn5+fn6Ojo6Onp6enq6urq6+vr6+zs7Ozt7e3t7u7u7u/v7+/w8PDw8fHx8fLy8vLz8/Pz9PT09PX19fX29vb29/f39/j4+Pj5+fn5+vr6+vv7+/v8/Pz8/f39/f7+/v7///////////////////////////////////////////8=");
+                    const popSound = new Audio("data:audio/wav;base64,UklGRqwCAABXQVZFZm10IBAAAAABAAEARKwAABCxAgAEABAAZGF0YYgCAACAgICAgICAgICAgICAgICAgICAgICAgICBgYGCgoKCg4ODg4SEhISFhYWGhoaGh4eHiIiIiImJiYmKioqLi4uLjIyMjI2NjY6Ojo+Pj5CQkJGRkZGSkpKTk5OTlJSUlZWVlZaWlpeXl5eYmJiZmZmampqam5ubnJycnZ2dnZ6enp+fn6CgoKGhoaKioqOjo6SkpKWlpaWmpqampqanp6enqKioqampqaqqqqurq6usrKysra2tra2trq6urq+vr6+wsLCxsbGxsrKysrOzs7O0tLS0tbW1tbW1tra2tre3t7e4uLi4ubm5ubq6uru7u7u8vLy8vb29vb6+vr6/v7+/wMDAwMHBwcHCwsLCw8PDw8TExMTFxcXFxsbGxsfHx8fIyMjIycnJycrKysrLy8vLzMzMzM3Nzc3Ozs7Oz8/Pz9DQ0NDR0dHR0tLS0tPT09PU1NTU1dXV1dbW1tbX19fX2NjY2NnZ2dna2trb29vb3Nzc3N3d3d3e3t7e39/f3+Dg4ODh4eHh4uLi4uPj4+Pk5OTk5eXl5ebm5ubn5+fn6Ojo6Onp6enq6urq6+vr6+zs7Ozt7e3t7u7u7u/v7+/w8PDw8fHx8fLy8vLz8/Pz9PT09PX19fX29vb29/f39/j4+Pj5+fn5+vr6+vv7+/v8/Pz8/f39/f7+/v7///////////////////////////////////////////8=");
                     popSound.volume = 0.3;
                     popSound.play();
                 });
@@ -716,6 +863,7 @@
                     }
                 }, 1500);
             } else {
+                message.textContent = '${translations[currentLang].wrongAnswer}';
                 message.textContent = 'Spróbuj jeszcze raz!';
                 message.style.color = 'red';
                 wrongSound.play();

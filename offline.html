@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CraftMath - Offline</title>
+    <script src="translations.js"></script>
+    <style>
+        @font-face {
+            font-family: 'PixelFont';
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/font-minecraft/5.8.1/font-minecraft.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            font-family: 'PixelFont', monospace;
+            background-color: #8b8b8b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            text-shadow: 2px 2px #000000;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #5c5c5c;
+            border: 4px solid #2d2d2d;
+            padding: 20px;
+            box-shadow: 0 0 0 4px #7e7e7e;
+        }
+        h1 {
+            color: #ffff55;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .retry-button {
+            background-color: #546454;
+            border: 4px solid #2d3a2d;
+            color: white;
+            padding: 10px 20px;
+            font-family: 'PixelFont', monospace;
+            font-size: 20px;
+            cursor: pointer;
+            text-shadow: 2px 2px #000000;
+            transition: all 0.2s;
+        }
+        .retry-button:hover {
+            background-color: #48a248;
+            transform: translateY(-2px);
+        }
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .language-button {
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            border: 2px solid #2d2d2d;
+            transition: transform 0.2s;
+        }
+        .language-button:hover {
+            transform: translateY(-2px);
+        }
+        .language-button.active {
+            border: 2px solid #ffff55;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <img src="flags/en.png" alt="English" class="language-button" onclick="setLanguage('en')">
+        <img src="flags/pl.png" alt="Polski" class="language-button" onclick="setLanguage('pl')">
+    </div>
+    <div class="container">
+        <h1 id="offline-title">CraftMath - Offline</h1>
+        <p id="offline-message">Oops! Looks like you're offline.</p>
+        <p id="offline-try-again">Try again when you're online.</p>
+        <button class="retry-button" onclick="window.location.reload()" id="refresh-button">REFRESH PAGE</button>
+    </div>
+    <script>
+        // Get the user's preferred language from localStorage or default to English
+        let currentLang = localStorage.getItem('craftmath-lang') || 'en';
+        
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('craftmath-lang', lang);
+            updateTexts();
+            updateActiveButton();
+        }
+        
+        function updateTexts() {
+            document.getElementById('offline-title').textContent = translations[currentLang].offline.title;
+            document.getElementById('offline-message').textContent = translations[currentLang].offline.message;
+            document.getElementById('offline-try-again').textContent = translations[currentLang].offline.tryAgain;
+            document.getElementById('refresh-button').textContent = translations[currentLang].offline.refresh;
+        }
+        
+        function updateActiveButton() {
+            document.querySelectorAll('.language-button').forEach(button => {
+                if (button.alt.toLowerCase().startsWith(currentLang)) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+        
+        // Initial setup
+        updateTexts();
+        updateActiveButton();
+    </script>
+</body>
+</html> 

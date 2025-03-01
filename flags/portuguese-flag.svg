@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 30">
+  <!-- Green (left) -->
+  <rect width="16" height="30" fill="#006600"/>
+  
+  <!-- Red (right) -->
+  <rect x="16" width="24" height="30" fill="#FF0000"/>
+  
+  <!-- Coat of Arms (simplified for small size) -->
+  <circle cx="16" cy="15" r="5" fill="#FFFF00"/>
+  <circle cx="16" cy="15" r="4" fill="#FFFFFF"/>
+  <path d="M12,15 A4,4 0 0 1 20,15" stroke="#0000CC" stroke-width="0.7" fill="none"/>
+  <path d="M13,13 A3,3 0 0 1 19,13" stroke="#0000CC" stroke-width="0.5" fill="none"/>
+  <circle cx="16" cy="11.5" r="1" fill="#FFFFFF" stroke="#0000CC" stroke-width="0.5"/>
+</svg>

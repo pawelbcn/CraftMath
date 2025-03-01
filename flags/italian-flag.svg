@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 30">
+  <!-- Green (left) -->
+  <rect width="13.33" height="30" fill="#008C45"/>
+  
+  <!-- White (middle) -->
+  <rect x="13.33" width="13.34" height="30" fill="#FFFFFF"/>
+  
+  <!-- Red (right) -->
+  <rect x="26.67" width="13.33" height="30" fill="#CD212A"/>
+</svg>

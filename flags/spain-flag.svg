@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 30">
+  <!-- Red (top and bottom) -->
+  <rect width="40" height="30" fill="#C60B1E"/>
+  
+  <!-- Yellow (middle) -->
+  <rect y="7.5" width="40" height="15" fill="#FFC400"/>
+  
+  <!-- Improved coat of arms -->
+  <g transform="translate(16, 10.5) scale(0.7)">
+    <!-- Shield outline -->
+    <path d="M0,0 L8,0 L8,8 Q4,12 0,8 Z" fill="#FFFFFF" stroke="#000000" stroke-width="0.5"/>
+    
+    <!-- Castle (Castile) - top left -->
+    <rect x="0.5" y="0.5" width="3.5" height="3.5" fill="#C60B1E"/>
+    <path d="M1,1 v1 h0.5 v-1 h1 v1 h0.5 v-1 h1 v2 h-3 z" fill="#FFC400"/>
+    
+    <!-- Lion (León) - top right -->
+    <rect x="4" y="0.5" width="3.5" height="3.5" fill="#FFFFFF"/>
+    <path d="M5.5,1.5 l1,1 l-1,1 z" fill="#C60B1E"/>
+    
+    <!-- Chains (Navarra) - bottom left -->
+    <rect x="0.5" y="4" width="3.5" height="3.5" fill="#FFC400"/>
+    <path d="M2,5.5 h0.5 v0.5 h0.5 v-0.5 h0.5" stroke="#C60B1E" stroke-width="0.5" fill="none"/>
+    
+    <!-- Stripes (Aragon) - bottom right -->
+    <rect x="4" y="4" width="3.5" height="3.5" fill="#FFC400"/>
+    <rect x="4" y="4.5" width="3.5" height="0.5" fill="#C60B1E"/>
+    <rect x="4" y="5.5" width="3.5" height="0.5" fill="#C60B1E"/>
+    <rect x="4" y="6.5" width="3.5" height="0.5" fill="#C60B1E"/>
+    
+    <!-- Pomegranate (Granada) - bottom -->
+    <circle cx="4" cy="8" r="0.7" fill="#C60B1E"/>
+    <path d="M4,7.5 v-0.7" stroke="#006600" stroke-width="0.3"/>
+  </g>
+  
+  <!-- Crown -->
+  <path d="M19,9.5 L21,9.5 L21,10.5 L19,10.5 Z" fill="#FFC400"/>
+  <path d="M18.5,9.5 L21.5,9.5 L21.5,10 L18.5,10 Z" fill="#FFC400"/>
+</svg>

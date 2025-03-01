@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 30">
+  <!-- White half (top) -->
+  <rect width="40" height="15" fill="#FFFFFF"/>
+  
+  <!-- Red half (bottom) -->
+  <rect y="15" width="40" height="15" fill="#DC143C"/>
+</svg>
