@@ -492,7 +492,7 @@
                 <div class="start-screen">
                     <div class="minecraft-logo">CRAFTMATH</div>
                     <h1>${translations[currentLang].title}</h1>
-                    <h2>${translations[currentLang].chooseMode}</h2>
+                    <h2>${translations[currentLang].chooseModeTitle}</h2>
                     <button id="learning-mode" class="mode-button">${translations[currentLang].learningMode}</button>
                     <button id="game-mode" class="mode-button">${translations[currentLang].gameMode}</button>
                     <button id="show-leaderboard" class="mode-button">${translations[currentLang].leaderboard}</button>
@@ -534,11 +534,11 @@
                         <h3>${translations[currentLang].chooseNumber}</h3>
                         <div class="number-grid">
                             ${generateNumberButtons()}
-                            ${gameMode === 'game' ? `<button id="number-all" class="number-button">${translations[currentLang].all}</button>` : ''}
+                            ${gameMode === 'game' ? `<button id="number-all" class="number-button">${translations[currentLang].mix}</button>` : ''}
                         </div>
                     </div>
-                    <button id="start-game" class="mode-button">${translations[currentLang].start} ${gameMode === 'learning' ? translations[currentLang].learning : translations[currentLang].game}</button>
-                    <button id="back-to-start" class="back-button">${translations[currentLang].back}</button>
+                    <button id="start-game" class="mode-button">${translations[currentLang].startLearning}</button>
+                    <button id="back-to-start" class="back-button">${translations[currentLang].backToMenu}</button>
                 </div>
             `;
             
@@ -629,12 +629,12 @@
             container.innerHTML = `
                 <div class="game-info">
                     <div>${translations[currentLang].mode}: <span class="mode">${modeText}</span></div>
-                    ${gameMode === 'learning' ? `<div>${translations[currentLang].multiplyBy}: <span class="multiplier">${multiplier}</span></div>` : ''}
+                    ${gameMode === 'learning' ? `<div>${translations[currentLang].multiplier}: <span class="multiplier">${multiplier}</span></div>` : ''}
                 </div>
                 
                 <h1>${translations[currentLang].title}</h1>
-                <div class="question-container">${translations[currentLang].howMuchIs} <span id="number">1</span> × <span id="multiplier-display">${multiplier}</span> = ?</div>
-                <div class="equation ${gameMode === 'game' ? 'hidden' : ''}"><span id="sets-count">1</span> ${translations[currentLang].setsOf} <span id="dots-count">${multiplier}</span> ${translations[currentLang].dots}</div>
+                <div class="question-container">${translations[currentLang].howMuch} <span id="number">1</span> × <span id="multiplier-display">${multiplier}</span> = ?</div>
+                <div class="equation ${gameMode === 'game' ? 'hidden' : ''}">${translations[currentLang].setsOf} <span id="sets-count">1</span> ${translations[currentLang].dots}</div>
                 ${gameMode === 'game' ? `<button id="hint-button" class="hint-button">${translations[currentLang].showHint}</button>` : ''}
                 <div class="sets-container ${gameMode === 'game' ? 'hidden' : ''}" id="sets-container"></div>
                 <div class="options-container" id="options"></div>
@@ -1064,70 +1064,58 @@
                 name: playerName,
                 score: score,
                 mode: mode === 'learning' ? translations[currentLang].learningMode : translations[currentLang].gameMode,
-                multiplier: mult,
+                multiplier: mode === 'game' ? translations[currentLang].mix : `x${mult}`,
                 date: new Date().toLocaleDateString()
             };
             
-            // Dodaj do tablicy wyników
             leaderboard.push(newScore);
-            
-            // Sortuj wyniki malejąco według punktów
             leaderboard.sort((a, b) => b.score - a.score);
             
-            // Ogranicz listę do 20 najlepszych wyników
             if (leaderboard.length > 20) {
                 leaderboard = leaderboard.slice(0, 20);
             }
             
-            // Zapisz do localStorage
             localStorage.setItem('craftMathLeaderboard', JSON.stringify(leaderboard));
         }
         
         // Renderuj ekran tablicy wyników
         function renderLeaderboard() {
             const container = document.getElementById('game-container');
+            const scores = JSON.parse(localStorage.getItem('craftmath-scores')) || [];
             
-            let tableContent = '';
-            leaderboard.forEach((entry, index) => {
-                tableContent += `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td>${entry.name}</td>
-                        <td>${entry.score}</td>
-                        <td>${entry.mode}</td>
-                        <td>${entry.mode === translations[currentLang].learningMode ? 'x' + entry.multiplier : 'Mix'}</td>
-                        <td>${entry.date}</td>
-                    </tr>
-                `;
-            });
-            
-            container.innerHTML = `
-                <div class="start-screen">
-                    <h1>${translations[currentLang].leaderboard}</h1>
-                    <div class="leaderboard-container">
-                        <div class="leaderboard-title">${translations[currentLang].bestScores}</div>
-                        <table class="leaderboard-table">
-                            <thead>
+            let html = `
+                <div class="leaderboard">
+                    <h1>${translations[currentLang].leaderboardTitle}</h1>
+                    ${scores.length === 0 ? 
+                        `<p>${translations[currentLang].noScores}</p>` :
+                        `<table>
+                            <tr>
+                                <th>${translations[currentLang].rank}</th>
+                                <th>${translations[currentLang].player}</th>
+                                <th>${translations[currentLang].score}</th>
+                                <th>${translations[currentLang].mode}</th>
+                                <th>${translations[currentLang].multiplier}</th>
+                                <th>${translations[currentLang].date}</th>
+                            </tr>
+                            ${scores.sort((a, b) => b.score - a.score).map((score, index) => `
                                 <tr>
-                                    <th>${translations[currentLang].rank}</th>
-                                    <th>${translations[currentLang].player}</th>
-                                    <th>${translations[currentLang].points}</th>
-                                    <th>${translations[currentLang].mode}</th>
-                                    <th>${translations[currentLang].multiplier}</th>
-                                    <th>${translations[currentLang].date}</th>
+                                    <td>${index + 1}</td>
+                                    <td>${score.name}</td>
+                                    <td>${score.score}</td>
+                                    <td>${score.mode === 'learning' ? translations[currentLang].learningMode : translations[currentLang].gameMode}</td>
+                                    <td>${score.mode === 'game' ? translations[currentLang].mix : 'x' + score.multiplier}</td>
+                                    <td>${new Date(score.date).toLocaleDateString()}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                ${tableContent || `<tr><td colspan="6" style="text-align: center;">${translations[currentLang].noScores}</td></tr>`}
-                            </tbody>
-                        </table>
-                    </div>
-                    <button id="back-to-menu" class="back-button">${translations[currentLang].backToMenu}</button>
+                            `).join('')}
+                        </table>`
+                    }
+                    <button id="back-to-start" class="back-button">${translations[currentLang].backToMenu}</button>
                 </div>
             `;
+            container.innerHTML = html;
             
             // Dodaj nasłuchiwacz dla przycisku powrotu
-            document.getElementById('back-to-menu').addEventListener('click', () => {
+            document.getElementById('back-to-start').addEventListener('click', () => {
                 clickSound.play();
                 currentScreen = 'start';
                 renderStartScreen();
