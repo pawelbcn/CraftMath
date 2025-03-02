@@ -436,7 +436,7 @@
 
     <script>
         // Get the user's language
-        const currentLang = localStorage.getItem('craftmath-lang') || 'en';
+        let currentLang = localStorage.getItem('craftmath-lang') || 'en';
         document.documentElement.lang = currentLang;
         document.querySelector('.language-select').value = currentLang;
 
@@ -445,13 +445,16 @@
             // Update title
             document.title = translations[currentLang].title;
             
-            // Update all text elements with data-translate attribute
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.dataset.translate;
-                if (translations[currentLang][key]) {
-                    element.textContent = translations[currentLang][key];
-                }
-            });
+            // Update game mode text
+            if (currentScreen === 'start') {
+                renderStartScreen();
+            } else if (currentScreen === 'multiplier-select') {
+                renderMultiplierScreen();
+            } else if (currentScreen === 'game') {
+                renderGameScreen();
+            } else if (currentScreen === 'leaderboard') {
+                renderLeaderboard();
+            }
         }
 
         // Call updateTexts when DOM is loaded
@@ -479,7 +482,7 @@
         
         // Dźwięki
         const correctSound = new Audio("data:audio/wav;base64,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");
-        const wrongSound = new Audio("data:audio/wav;base64,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");
+        const wrongSound = new Audio("data:audio/wav;base64,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");
         const clickSound = new Audio("data:audio/wav;base64,UklGRswCAABXQVZFZm10IBAAAAABAAEARKwAAESsAAACABAAZGF0YagCAAAiIiIpKSkzMzM+Pj5ISEhQUFBWVlZaWlpeXl5gYGBiYmJiYmJiYmJhYWFgYGBeXl5cXFxZWVlVVVVRUVFMTExGRkZAQEA5OTkyMjIrKyskJCQeHh4YGBgSEhINDQ0ICAgFBQUCAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgIFBQUICAgNDQ0SEhIYGBgeHh4kJCQrKysyMjI5OTlAQEBGRkZMTExRUVFVVVVZWVlcXFxeXl5gYGBhYWFiYmJiYmJiYmJgYGBeXl5aWlpWVlZQUFBISEg+Pj4zMzMpKSkiIiIcHBwVFRUPDw8KCgoGBgYDAwMBAQEAAAAAAAAAAAAAAAAAAAAAAAABAQEDAwMGBgYKCgoPDw8VFRUcHBwiIiIpKSkzMzM+Pj5ISEhQUFBWVlZaWlpeXl5gYGBiYmJiYmJiYmJhYWFgYGBeXl5cXFxZWVlVVVVRUVFMTExGRkZAQEA5OTkyMjIrKyskJCQeHh4YGBgSEhINDQ0ICAgFBQUCAgIAAAAAAAAAAAAAAAAAAAAAAAACAgIFBQUICAgNDQ0SEhIYGBgeHh4kJCQrKysyMjI5OTlAQEBGRkZMTExRUVFVVVVZWVlcXFxeXl5gYGBhYWFiYmJiYmJiYmJgYGBeXl5aWlpWVlZQUFBISEg+Pj4zMzMpKSkiIiIcHBwVFRUPDw8KCgoGBgYDAwMBAQEAAAAAAAAAAAAAAAAAAAAAAAABAQEDAwMGBgYKCgoPDw8VFRX/////////////////////");
 
         // Renderuj ekran startowy
@@ -488,11 +491,11 @@
             container.innerHTML = `
                 <div class="start-screen">
                     <div class="minecraft-logo">CRAFTMATH</div>
-                    <h1>TABLICZKA MNOŻENIA</h1>
-                    <h2>Wybierz tryb gry:</h2>
-                    <button id="learning-mode" class="mode-button">TRYB NAUKI</button>
-                    <button id="game-mode" class="mode-button">TRYB GRY</button>
-                    <button id="show-leaderboard" class="mode-button">TABLICA WYNIKÓW</button>
+                    <h1>${translations[currentLang].title}</h1>
+                    <h2>${translations[currentLang].chooseMode}</h2>
+                    <button id="learning-mode" class="mode-button">${translations[currentLang].learningMode}</button>
+                    <button id="game-mode" class="mode-button">${translations[currentLang].gameMode}</button>
+                    <button id="show-leaderboard" class="mode-button">${translations[currentLang].leaderboard}</button>
                 </div>
             `;
             
@@ -526,16 +529,16 @@
             const container = document.getElementById('game-container');
             container.innerHTML = `
                 <div class="start-screen">
-                    <h1>${gameMode === 'learning' ? 'TRYB NAUKI' : 'TRYB GRY'}</h1>
+                    <h1>${gameMode === 'learning' ? translations[currentLang].learningMode : translations[currentLang].gameMode}</h1>
                     <div class="multiplier-selection">
-                        <h3>Wybierz liczbę do nauki mnożenia:</h3>
+                        <h3>${translations[currentLang].chooseNumber}</h3>
                         <div class="number-grid">
                             ${generateNumberButtons()}
-                            ${gameMode === 'game' ? '<button id="number-all" class="number-button">WSZYSTKIE</button>' : ''}
+                            ${gameMode === 'game' ? `<button id="number-all" class="number-button">${translations[currentLang].all}</button>` : ''}
                         </div>
                     </div>
-                    <button id="start-game" class="mode-button">ROZPOCZNIJ ${gameMode === 'learning' ? 'NAUKĘ' : 'GRĘ'}</button>
-                    <button id="back-to-start" class="back-button">POWRÓT</button>
+                    <button id="start-game" class="mode-button">${translations[currentLang].start} ${gameMode === 'learning' ? translations[currentLang].learning : translations[currentLang].game}</button>
+                    <button id="back-to-start" class="back-button">${translations[currentLang].back}</button>
                 </div>
             `;
             
@@ -620,19 +623,19 @@
         function renderGameScreen() {
             const container = document.getElementById('game-container');
             
-            // Informacja o trybie gry i mnożniku
-            const modeText = gameMode === 'learning' ? 'Tryb Nauki' : 'Tryb Gry';
+            // Game mode and multiplier info
+            const modeText = gameMode === 'learning' ? translations[currentLang].learningMode : translations[currentLang].gameMode;
             
             container.innerHTML = `
                 <div class="game-info">
-                    <div>Tryb: <span class="mode">${modeText}</span></div>
-                    ${gameMode === 'learning' ? `<div>Mnożenie przez: <span class="multiplier">${multiplier}</span></div>` : ''}
+                    <div>${translations[currentLang].mode}: <span class="mode">${modeText}</span></div>
+                    ${gameMode === 'learning' ? `<div>${translations[currentLang].multiplyBy}: <span class="multiplier">${multiplier}</span></div>` : ''}
                 </div>
                 
-                <h1>CRAFTMATH: TABLICZKA MNOŻENIA</h1>
-                <div class="question-container">Ile to <span id="number">1</span> × <span id="multiplier-display">${multiplier}</span> = ?</div>
-                <div class="equation ${gameMode === 'game' ? 'hidden' : ''}"><span id="sets-count">1</span> zbiorów po <span id="dots-count">${multiplier}</span> kropki</div>
-                ${gameMode === 'game' ? '<button id="hint-button" class="hint-button">POKAŻ PODPOWIEDŹ</button>' : ''}
+                <h1>${translations[currentLang].title}</h1>
+                <div class="question-container">${translations[currentLang].howMuchIs} <span id="number">1</span> × <span id="multiplier-display">${multiplier}</span> = ?</div>
+                <div class="equation ${gameMode === 'game' ? 'hidden' : ''}"><span id="sets-count">1</span> ${translations[currentLang].setsOf} <span id="dots-count">${multiplier}</span> ${translations[currentLang].dots}</div>
+                ${gameMode === 'game' ? `<button id="hint-button" class="hint-button">${translations[currentLang].showHint}</button>` : ''}
                 <div class="sets-container ${gameMode === 'game' ? 'hidden' : ''}" id="sets-container"></div>
                 <div class="options-container" id="options"></div>
                 <div class="message" id="message"></div>
@@ -640,7 +643,7 @@
                 <div class="progress-container">
                     <div class="progress-bar" id="progress-bar"></div>
                 </div>
-                <button id="back-to-menu" class="back-button">POWRÓT DO MENU</button>
+                <button id="back-to-menu" class="back-button">${translations[currentLang].backToMenu}</button>
             `;
             
             // Dodaj nasłuchiwacz dla przycisku powrotu
@@ -662,11 +665,11 @@
                     if (hintsVisible) {
                         setsContainer.classList.remove('hidden');
                         equation.classList.remove('hidden');
-                        hintButton.textContent = 'UKRYJ PODPOWIEDŹ';
+                        hintButton.textContent = translations[currentLang].hideHint;
                     } else {
                         setsContainer.classList.add('hidden');
                         equation.classList.add('hidden');
-                        hintButton.textContent = 'POKAŻ PODPOWIEDŹ';
+                        hintButton.textContent = translations[currentLang].showHint;
                     }
                 });
             }
@@ -805,22 +808,20 @@
             const equation = document.querySelector('.equation');
             
             if (selectedOption === correctAnswer) {
-                message.textContent = 'Brawo! Dobra odpowiedź!';
+                message.textContent = translations[currentLang].correctAnswer;
                 message.style.color = 'green';
                 score++;
                 correctSound.play();
                 
-                // Podświetlanie zbiorów dla wizualnego efektu
+                // Highlight sets for visual effect
                 const sets = document.querySelectorAll('.set');
                 sets.forEach(set => {
                     set.style.backgroundColor = '#68b337';
                     set.style.borderColor = '#3a6b15';
                 });
                 
-                // W trybie gry pokazujemy zbiory tylko jeśli są włączone podpowiedzi
+                // In game mode, show sets only if hints are enabled
                 if (gameMode === 'game' && !hintsVisible) {
-                    // Nie pokazujemy zbiorów automatycznie po poprawnej odpowiedzi
-                    // Użytkownik musi użyć przycisku POKAŻ PODPOWIEDŹ
                     if (setsContainer) setsContainer.classList.add('hidden');
                     if (equation) equation.classList.add('hidden');
                 }
@@ -860,11 +861,11 @@
                     }
                 }, 1500);
             } else {
-                message.textContent = 'Spróbuj jeszcze raz!';
+                message.textContent = translations[currentLang].tryAgain;
                 message.style.color = 'red';
                 wrongSound.play();
                 
-                // Efekt wizualny dla niepoprawnej odpowiedzi
+                // Visual effect for incorrect answer
                 const sets = document.querySelectorAll('.set');
                 sets.forEach(set => {
                     set.style.backgroundColor = '#a12722';
@@ -919,46 +920,46 @@
             
             let messageText = '';
             if (score >= 8) {
-                messageText = 'Wspaniale! Jesteś mistrzem tabliczki mnożenia!';
+                messageText = translations[currentLang].excellent;
                 message.style.color = 'green';
             } else if (score >= 5) {
-                messageText = 'Dobra robota! Ćwicz dalej!';
+                messageText = translations[currentLang].goodJob;
                 message.style.color = 'blue';
             } else {
-                messageText = 'Próbuj dalej! Z każdym razem będzie lepiej!';
+                messageText = translations[currentLang].keepTrying;
                 message.style.color = 'purple';
             }
             
-            // Podsumowanie wyników
-            messageText = `${messageText}<br>Twój wynik: ${score} z ${totalQuestions} punktów!`;
+            // Score summary
+            messageText = `${messageText}<br>${translations[currentLang].yourScore}: ${score} ${translations[currentLang].outOf} ${totalQuestions}!`;
             message.innerHTML = messageText;
             
-            // Formularz do zapisania wyniku
+            // Score form
             const scoreForm = document.createElement('div');
             scoreForm.style.margin = '20px';
             scoreForm.innerHTML = `
-                <input type="text" class="player-name-input" id="player-name" placeholder="Wpisz swoje imię" maxlength="15">
-                <button class="save-score-button" id="save-score">ZAPISZ WYNIK</button>
+                <input type="text" class="player-name-input" id="player-name" placeholder="${translations[currentLang].enterName}" maxlength="15">
+                <button class="save-score-button" id="save-score">${translations[currentLang].saveScore}</button>
             `;
             gameContainer.appendChild(scoreForm);
             
-            // Nasłuchiwacz do zapisywania wyniku
+            // Save score listener
             document.getElementById('save-score').addEventListener('click', () => {
                 const playerName = document.getElementById('player-name').value.trim();
                 if (playerName) {
                     clickSound.play();
                     saveScore(playerName, score, gameMode, multiplier);
-                    scoreForm.innerHTML = '<div style="color: green; margin: 10px 0;">Wynik zapisany!</div>';
+                    scoreForm.innerHTML = `<div style="color: green; margin: 10px 0;">${translations[currentLang].scoreSaved}</div>`;
                     
                     setTimeout(() => {
                         renderLeaderboard();
                     }, 1000);
                 } else {
-                    alert('Proszę wpisać imię!');
+                    alert(translations[currentLang].pleaseEnterName);
                 }
             });
             
-            // Wizualizacja wyniku
+            // Score visualization
             const resultContainer = document.createElement('div');
             resultContainer.style.display = 'flex';
             resultContainer.style.justifyContent = 'center';
@@ -975,9 +976,9 @@
             
             gameContainer.appendChild(resultContainer);
             
-            // Przycisk do ponownej gry w stylu Minecraft
+            // Play again button
             const playAgainButton = document.createElement('button');
-            playAgainButton.textContent = 'ZAGRAJ JESZCZE RAZ';
+            playAgainButton.textContent = translations[currentLang].playAgain;
             playAgainButton.style.padding = '10px 20px';
             playAgainButton.style.fontSize = '20px';
             playAgainButton.style.backgroundColor = '#1d8b1d';
@@ -988,7 +989,7 @@
             playAgainButton.style.textShadow = '2px 2px #000000';
             playAgainButton.style.boxShadow = 'inset -2px -4px 0 1px rgba(0,0,0,0.3)';
             playAgainButton.style.position = 'relative';
-            playAgainButton.style.fontFamily = 'PixelFont', monospace;
+            playAgainButton.style.fontFamily = 'PixelFont, monospace';
             
             playAgainButton.addEventListener('mouseover', () => {
                 playAgainButton.style.backgroundColor = '#28a428';
@@ -1017,7 +1018,7 @@
             
             // Przycisk powrotu do menu głównego
             const backToMenuButton = document.createElement('button');
-            backToMenuButton.textContent = 'POWRÓT DO MENU';
+            backToMenuButton.textContent = translations[currentLang].backToMenu;
             backToMenuButton.style.padding = '10px 20px';
             backToMenuButton.style.fontSize = '16px';
             backToMenuButton.style.backgroundColor = '#a15252';
@@ -1027,7 +1028,7 @@
             backToMenuButton.style.cursor = 'pointer';
             backToMenuButton.style.textShadow = '2px 2px #000000';
             backToMenuButton.style.boxShadow = 'inset -2px -4px 0 1px rgba(0,0,0,0.3)';
-            backToMenuButton.style.fontFamily = 'PixelFont', monospace;
+            backToMenuButton.style.fontFamily = 'PixelFont, monospace';
             
             backToMenuButton.addEventListener('mouseover', () => {
                 backToMenuButton.style.backgroundColor = '#c45a5a';
@@ -1062,7 +1063,7 @@
             const newScore = {
                 name: playerName,
                 score: score,
-                mode: mode === 'learning' ? 'Nauka' : 'Gra',
+                mode: mode === 'learning' ? translations[currentLang].learningMode : translations[currentLang].gameMode,
                 multiplier: mult,
                 date: new Date().toLocaleDateString()
             };
@@ -1094,7 +1095,7 @@
                         <td>${entry.name}</td>
                         <td>${entry.score}</td>
                         <td>${entry.mode}</td>
-                        <td>${entry.mode === 'Nauka' ? 'x' + entry.multiplier : 'Mix'}</td>
+                        <td>${entry.mode === translations[currentLang].learningMode ? 'x' + entry.multiplier : 'Mix'}</td>
                         <td>${entry.date}</td>
                     </tr>
                 `;
@@ -1102,26 +1103,26 @@
             
             container.innerHTML = `
                 <div class="start-screen">
-                    <h1>TABLICA WYNIKÓW</h1>
+                    <h1>${translations[currentLang].leaderboard}</h1>
                     <div class="leaderboard-container">
-                        <div class="leaderboard-title">Najlepsze wyniki</div>
+                        <div class="leaderboard-title">${translations[currentLang].bestScores}</div>
                         <table class="leaderboard-table">
                             <thead>
                                 <tr>
-                                    <th>Lp.</th>
-                                    <th>Gracz</th>
-                                    <th>Punkty</th>
-                                    <th>Tryb</th>
-                                    <th>Mnożnik</th>
-                                    <th>Data</th>
+                                    <th>${translations[currentLang].rank}</th>
+                                    <th>${translations[currentLang].player}</th>
+                                    <th>${translations[currentLang].points}</th>
+                                    <th>${translations[currentLang].mode}</th>
+                                    <th>${translations[currentLang].multiplier}</th>
+                                    <th>${translations[currentLang].date}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                ${tableContent || '<tr><td colspan="6" style="text-align: center;">Brak zapisanych wyników</td></tr>'}
+                                ${tableContent || `<tr><td colspan="6" style="text-align: center;">${translations[currentLang].noScores}</td></tr>`}
                             </tbody>
                         </table>
                     </div>
-                    <button id="back-to-menu" class="back-button">POWRÓT DO MENU</button>
+                    <button id="back-to-menu" class="back-button">${translations[currentLang].backToMenu}</button>
                 </div>
             `;
             
