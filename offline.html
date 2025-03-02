@@ -54,11 +54,14 @@
             transform: translateY(-2px);
         }
         .language-selector {
-            position: absolute;
-            top: 20px;
-            right: 20px;
             display: flex;
             gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .language-button {
             width: 40px;
@@ -76,6 +79,12 @@
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1 id="offline-title">CraftMath - Offline</h1>
+        <p id="offline-message">Oops! Looks like you're offline.</p>
+        <p id="offline-try-again">Try again when you're online.</p>
+        <button class="retry-button" onclick="window.location.reload()" id="refresh-button">REFRESH PAGE</button>
+    </div>
     <div class="language-selector">
         <img src="flags/en.png" alt="English" class="language-button" onclick="setLanguage('en')" title="English">
         <img src="flags/pl.png" alt="Polski" class="language-button" onclick="setLanguage('pl')" title="Polski">
@@ -89,12 +98,6 @@
         <img src="flags/it.png" alt="Italiano" class="language-button" onclick="setLanguage('it')" title="Italiano">
         <img src="flags/pt.png" alt="Português" class="language-button" onclick="setLanguage('pt')" title="Português">
         <img src="flags/nl.png" alt="Nederlands" class="language-button" onclick="setLanguage('nl')" title="Nederlands">
-    </div>
-    <div class="container">
-        <h1 id="offline-title">CraftMath - Offline</h1>
-        <p id="offline-message">Oops! Looks like you're offline.</p>
-        <p id="offline-try-again">Try again when you're online.</p>
-        <button class="retry-button" onclick="window.location.reload()" id="refresh-button">REFRESH PAGE</button>
     </div>
     <script>
         // Get the user's preferred language from localStorage or default to English

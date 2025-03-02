@@ -41,7 +41,11 @@ const translations = {
         keepTrying: "Keep trying! It gets better with practice!",
         finalScore: "Your score: {score} out of {total} points!",
         githubLink: "Code on GitHub",
-        howMuch: "How much is"
+        howMuch: "How much is",
+        chooseMultiplier: "Choose a number to practice:",
+        backToStart: "BACK TO MENU",
+        gameModeOnce: "GAME MODE (ONE NUMBER)",
+        gameModeAll: "GAME MODE (ALL NUMBERS)"
     },
     pl: {
         title: "TABLICZKA MNOŻENIA",
@@ -85,7 +89,11 @@ const translations = {
         keepTrying: "Próbuj dalej! Z każdym razem będzie lepiej!",
         finalScore: "Twój wynik: {score} z {total} punktów!",
         githubLink: "Kod na GitHub",
-        howMuch: "Ile to"
+        howMuch: "Ile to",
+        chooseMultiplier: "Wybierz liczbę do nauki mnożenia:",
+        backToStart: "POWRÓT DO MENU",
+        gameModeOnce: "TRYB GRY (JEDNA LICZBA)",
+        gameModeAll: "TRYB GRY (WSZYSTKIE LICZBY)"
     },
     zh: {
         title: "乘法表",
@@ -108,7 +116,7 @@ const translations = {
         saveScore: "保存分数",
         scoreSaved: "分数已保存！",
         leaderboardTitle: "最高分",
-        noScores: "No scores recorded yet.",
+        noScores: "还没有记录分数。",
         rank: "排名",
         player: "玩家",
         score: "分数",
@@ -129,7 +137,11 @@ const translations = {
         keepTrying: "继续努力！熟能生巧！",
         finalScore: "你的得分：{total}分中的{score}分！",
         githubLink: "GitHub上的代码",
-        howMuch: "多少是"
+        howMuch: "多少是",
+        chooseMultiplier: "选择要练习的数字：",
+        backToStart: "返回菜单",
+        gameModeOnce: "游戏模式（单个数字）",
+        gameModeAll: "游戏模式（所有数字）"
     },
     hi: {
         title: "पहाड़े",
@@ -152,7 +164,7 @@ const translations = {
         saveScore: "स्कोर सेव करें",
         scoreSaved: "स्कोर सेव हो गया!",
         leaderboardTitle: "टॉप स्कोर",
-        noScores: "No scores recorded yet.",
+        noScores: "अभी तक कोई स्कोर दर्ज नहीं है।",
         rank: "रैंक",
         player: "खिलाड़ी",
         score: "स्कोर",
@@ -173,7 +185,11 @@ const translations = {
         keepTrying: "प्रयास करते रहें! अभ्यास से सुधार होगा!",
         finalScore: "आपका स्कोर: {total} में से {score} अंक!",
         githubLink: "GitHub पर कोड",
-        howMuch: "कितना होता है"
+        howMuch: "कितना होता है",
+        chooseMultiplier: "अभ्यास के लिए एक संख्या चुनें:",
+        backToStart: "मेन्यू पर वापस जाएं",
+        gameModeOnce: "खेल मोड (एक संख्या)",
+        gameModeAll: "खेल मोड (सभी संख्याएं)"
     },
     es: {
         title: "TABLAS DE MULTIPLICAR",
@@ -196,7 +212,7 @@ const translations = {
         saveScore: "GUARDAR PUNTAJE",
         scoreSaved: "¡Puntaje guardado!",
         leaderboardTitle: "MEJORES PUNTAJES",
-        noScores: "No scores recorded yet.",
+        noScores: "Aún no hay puntajes registrados.",
         rank: "Posición",
         player: "Jugador",
         score: "Puntaje",
@@ -217,7 +233,11 @@ const translations = {
         keepTrying: "¡Sigue intentando! ¡Mejorará con la práctica!",
         finalScore: "Tu puntaje: ¡{score} de {total} puntos!",
         githubLink: "Código en GitHub",
-        howMuch: "¿Cuánto es"
+        howMuch: "¿Cuánto es",
+        chooseMultiplier: "Elige un número para practicar:",
+        backToStart: "VOLVER AL MENÚ",
+        gameModeOnce: "MODO JUEGO (UN NÚMERO)",
+        gameModeAll: "MODO JUEGO (TODOS LOS NÚMEROS)"
     },
     ar: {
         title: "جدول الضرب",
@@ -240,7 +260,7 @@ const translations = {
         saveScore: "حفظ النتيجة",
         scoreSaved: "تم حفظ النتيجة!",
         leaderboardTitle: "أعلى النتائج",
-        noScores: "No scores recorded yet.",
+        noScores: "لا توجد نتائج مسجلة بعد.",
         rank: "المرتبة",
         player: "اللاعب",
         score: "النتيجة",
@@ -261,7 +281,11 @@ const translations = {
         keepTrying: "واصل المحاولة! ستتحسن مع التدريب!",
         finalScore: "نتيجتك: {score} من {total} نقطة!",
         githubLink: "الكود على GitHub",
-        howMuch: "كم يساوي"
+        howMuch: "كم يساوي",
+        chooseMultiplier: "اختر رقماً للتدرب عليه:",
+        backToStart: "العودة للقائمة",
+        gameModeOnce: "وضع اللعب (رقم واحد)",
+        gameModeAll: "وضع اللعب (كل الأرقام)"
     },
     bn: {
         title: "নামতা",
@@ -284,7 +308,7 @@ const translations = {
         saveScore: "স্কোর সংরক্ষণ করুন",
         scoreSaved: "স্কোর সংরক্ষিত হয়েছে!",
         leaderboardTitle: "সেরা স্কোর",
-        noScores: "No scores recorded yet.",
+        noScores: "এখনও কোন স্কোর রেকর্ড করা হয়নি।",
         rank: "র‍্যাঙ্ক",
         player: "খেলোয়াড়",
         score: "স্কোর",
@@ -305,7 +329,11 @@ const translations = {
         keepTrying: "চেষ্টা করতে থাকুন! অনুশীলনে উন্নতি হবে!",
         finalScore: "আপনার স্কোর: {total} এর মধ্যে {score} পয়েন্ট!",
         githubLink: "GitHub এ কোড",
-        howMuch: "কত হয়"
+        howMuch: "কত হয়",
+        chooseMultiplier: "অনুশীলনের জন্য একটি সংখ্যা বেছে নিন:",
+        backToStart: "মেনুতে ফিরুন",
+        gameModeOnce: "খেলার মোড (একটি সংখ্যা)",
+        gameModeAll: "খেলার মোড (সব সংখ্যা)"
     },
     fr: {
         title: "TABLES DE MULTIPLICATION",
@@ -328,7 +356,7 @@ const translations = {
         saveScore: "SAUVEGARDER LE SCORE",
         scoreSaved: "Score sauvegardé !",
         leaderboardTitle: "MEILLEURS SCORES",
-        noScores: "No scores recorded yet.",
+        noScores: "Aucun score enregistré pour le moment.",
         rank: "Rang",
         player: "Joueur",
         score: "Score",
@@ -349,7 +377,11 @@ const translations = {
         keepTrying: "Continuez d'essayer ! Ça s'améliore avec la pratique !",
         finalScore: "Votre score : {score} sur {total} points !",
         githubLink: "Code sur GitHub",
-        howMuch: "Combien fait"
+        howMuch: "Combien fait",
+        chooseMultiplier: "Choisissez un nombre à pratiquer :",
+        backToStart: "RETOUR AU MENU",
+        gameModeOnce: "MODE JEU (UN NOMBRE)",
+        gameModeAll: "MODE JEU (TOUS LES NOMBRES)"
     },
     de: {
         title: "EINMALEINS",
@@ -372,7 +404,7 @@ const translations = {
         saveScore: "PUNKTZAHL SPEICHERN",
         scoreSaved: "Punktzahl gespeichert!",
         leaderboardTitle: "BESTENLISTE",
-        noScores: "No scores recorded yet.",
+        noScores: "Noch keine Punktzahlen aufgezeichnet.",
         rank: "Rang",
         player: "Spieler",
         score: "Punkte",
@@ -393,7 +425,11 @@ const translations = {
         keepTrying: "Bleib dran! Es wird mit der Übung besser!",
         finalScore: "Deine Punktzahl: {score} von {total} Punkten!",
         githubLink: "Code auf GitHub",
-        howMuch: "Wie viel ist"
+        howMuch: "Wie viel ist",
+        chooseMultiplier: "Wähle eine Zahl zum Üben:",
+        backToStart: "ZURÜCK ZUM MENÜ",
+        gameModeOnce: "SPIELMODUS (EINE ZAHL)",
+        gameModeAll: "SPIELMODUS (ALLE ZAHLEN)"
     },
     it: {
         title: "TABELLINE",
@@ -416,7 +452,7 @@ const translations = {
         saveScore: "SALVA PUNTEGGIO",
         scoreSaved: "Punteggio salvato!",
         leaderboardTitle: "MIGLIORI PUNTEGGI",
-        noScores: "No scores recorded yet.",
+        noScores: "Nessun punteggio registrato finora.",
         rank: "Posizione",
         player: "Giocatore",
         score: "Punteggio",
@@ -437,7 +473,11 @@ const translations = {
         keepTrying: "Continua a provare! Migliorerai con la pratica!",
         finalScore: "Il tuo punteggio: {score} su {total} punti!",
         githubLink: "Codice su GitHub",
-        howMuch: "Quanto fa"
+        howMuch: "Quanto fa",
+        chooseMultiplier: "Scegli un numero da praticare:",
+        backToStart: "TORNA AL MENU",
+        gameModeOnce: "MODALITÀ GIOCO (UN NUMERO)",
+        gameModeAll: "MODALITÀ GIOCO (TUTTI I NUMERI)"
     },
     pt: {
         title: "TABUADA",
@@ -460,7 +500,7 @@ const translations = {
         saveScore: "SALVAR PONTUAÇÃO",
         scoreSaved: "Pontuação salva!",
         leaderboardTitle: "MELHORES PONTUAÇÕES",
-        noScores: "No scores recorded yet.",
+        noScores: "Ainda não há pontuações registradas.",
         rank: "Posição",
         player: "Jogador",
         score: "Pontuação",
@@ -481,7 +521,11 @@ const translations = {
         keepTrying: "Continue tentando! Melhora com a prática!",
         finalScore: "Sua pontuação: {score} de {total} pontos!",
         githubLink: "Código no GitHub",
-        howMuch: "Quanto é"
+        howMuch: "Quanto é",
+        chooseMultiplier: "Escolha um número para praticar:",
+        backToStart: "VOLTAR AO MENU",
+        gameModeOnce: "MODO JOGO (UM NÚMERO)",
+        gameModeAll: "MODO JOGO (TODOS OS NÚMEROS)"
     },
     nl: {
         title: "TAFELS VAN VERMENIGVULDIGING",
@@ -504,7 +548,7 @@ const translations = {
         saveScore: "SCORE OPSLAAN",
         scoreSaved: "Score opgeslagen!",
         leaderboardTitle: "TOPSCORES",
-        noScores: "No scores recorded yet.",
+        noScores: "Nog geen scores opgenomen.",
         rank: "Rang",
         player: "Speler",
         score: "Score",
@@ -525,6 +569,10 @@ const translations = {
         keepTrying: "Blijf proberen! Het wordt beter met oefening!",
         finalScore: "Je score: {score} van de {total} punten!",
         githubLink: "Code op GitHub",
-        howMuch: "Hoeveel is"
+        howMuch: "Hoeveel is",
+        chooseMultiplier: "Kies een getal om te oefenen:",
+        backToStart: "TERUG NAAR MENU",
+        gameModeOnce: "SPELMODUS (ÉÉN GETAL)",
+        gameModeAll: "SPELMODUS (ALLE GETALLEN)"
     }
 }; 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CraftMath: Tabliczka Mnożenia</title>
+    <script src="translations.js"></script>
     <style>
         @font-face {
             font-family: 'PixelFont';
@@ -389,14 +390,76 @@
                 margin: 0 auto;
             }
         }
+        .language-selector {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(92, 92, 92, 0.9);
+            padding: 10px;
+            border: 2px solid #2d2d2d;
+            border-radius: 5px;
+        }
+        .language-button {
+            width: 32px;
+            height: 24px;
+            cursor: pointer;
+            border: 2px solid #2d2d2d;
+            transition: transform 0.2s;
+        }
+        .language-button:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
+    <div class="language-selector">
+        <img src="flags/en.png" alt="English" class="language-button" onclick="setLanguage('en')" title="English">
+        <img src="flags/pl.png" alt="Polski" class="language-button" onclick="setLanguage('pl')" title="Polski">
+        <img src="flags/zh.png" alt="中文" class="language-button" onclick="setLanguage('zh')" title="中文">
+        <img src="flags/hi.png" alt="हिंदी" class="language-button" onclick="setLanguage('hi')" title="हिंदी">
+        <img src="flags/es.png" alt="Español" class="language-button" onclick="setLanguage('es')" title="Español">
+        <img src="flags/ar.png" alt="العربية" class="language-button" onclick="setLanguage('ar')" title="العربية">
+        <img src="flags/bn.png" alt="বাংলা" class="language-button" onclick="setLanguage('bn')" title="বাংলা">
+        <img src="flags/fr.png" alt="Français" class="language-button" onclick="setLanguage('fr')" title="Français">
+        <img src="flags/de.png" alt="Deutsch" class="language-button" onclick="setLanguage('de')" title="Deutsch">
+        <img src="flags/it.png" alt="Italiano" class="language-button" onclick="setLanguage('it')" title="Italiano">
+        <img src="flags/pt.png" alt="Português" class="language-button" onclick="setLanguage('pt')" title="Português">
+        <img src="flags/nl.png" alt="Nederlands" class="language-button" onclick="setLanguage('nl')" title="Nederlands">
+    </div>
     <div class="game-container" id="game-container">
         <!-- Zostanie wypełnione przez JS -->
     </div>
 
     <script>
+        // Get the user's language
+        const currentLang = localStorage.getItem('craftmath-lang') || 'en';
+        document.documentElement.lang = currentLang;
+
+        // Function to update all text content based on current language
+        function updateTexts() {
+            // Update title
+            document.title = translations[currentLang].title;
+            
+            // Update all text elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+        }
+
+        // Call updateTexts when DOM is loaded
+        document.addEventListener('DOMContentLoaded', updateTexts);
+
         // Zmienne gry
         let currentQuestion = 1;
         let score = 0;

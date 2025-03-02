@@ -6,31 +6,135 @@
     <title>CraftMath - Tabliczka Mnożenia</title>
     <meta name="description" content="Interaktywna gra edukacyjna do nauki tabliczki mnożenia w stylu pikselowym.">
     <meta name="author" content="Pawel Marciniak">
-    <meta name="theme-color" content="#5c5c5c">
-    <!-- PWA meta tags -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="CraftMath">
-    <!-- PWA icons -->
-    <link rel="apple-touch-icon" href="icons/icon-72x72.png" sizes="72x72">
-    <link rel="apple-touch-icon" href="icons/icon-96x96.png" sizes="96x96">
-    <link rel="apple-touch-icon" href="icons/icon-128x128.png" sizes="128x128">
-    <link rel="apple-touch-icon" href="icons/icon-144x144.png" sizes="144x144">
-    <link rel="apple-touch-icon" href="icons/icon-152x152.png" sizes="152x152">
-    <link rel="apple-touch-icon" href="icons/icon-192x192.png" sizes="192x192">
-    <link rel="apple-touch-icon" href="icons/icon-384x384.png" sizes="384x384">
-    <link rel="apple-touch-icon" href="icons/icon-512x512.png" sizes="512x512">
-    <!-- Przekierowanie do głównego pliku gry -->
-    <meta http-equiv="refresh" content="0; url=gra.html">
+    <script src="translations.js"></script>
+    <style>
+        @font-face {
+            font-family: 'PixelFont';
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/font-minecraft/5.8.1/font-minecraft.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            font-family: 'PixelFont', monospace;
+            background-color: #8b8b8b;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
+            background-size: 32px 32px;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .language-selector {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            background: rgba(92, 92, 92, 0.9);
+            padding: 10px;
+            border: 2px solid #2d2d2d;
+            border-radius: 5px;
+        }
+        .language-button {
+            width: 32px;
+            height: 24px;
+            cursor: pointer;
+            border: 2px solid #2d2d2d;
+            transition: transform 0.2s;
+        }
+        .language-button:hover {
+            transform: scale(1.1);
+        }
+        .language-button.active {
+            border: 2px solid #ffff55;
+        }
+        p {
+            color: #ffffff;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-    <p>Przekierowywanie do gry CraftMath...</p>
+    <p>Choose your language / Wybierz język</p>
+    <div class="language-selector">
+        <img src="flags/en.png" alt="English" class="language-button" onclick="setLanguage('en')" title="English">
+        <img src="flags/pl.png" alt="Polski" class="language-button" onclick="setLanguage('pl')" title="Polski">
+        <img src="flags/zh.png" alt="中文" class="language-button" onclick="setLanguage('zh')" title="中文">
+        <img src="flags/hi.png" alt="हिंदी" class="language-button" onclick="setLanguage('hi')" title="हिंदी">
+        <img src="flags/es.png" alt="Español" class="language-button" onclick="setLanguage('es')" title="Español">
+        <img src="flags/ar.png" alt="العربية" class="language-button" onclick="setLanguage('ar')" title="العربية">
+        <img src="flags/bn.png" alt="বাংলা" class="language-button" onclick="setLanguage('bn')" title="বাংলা">
+        <img src="flags/fr.png" alt="Français" class="language-button" onclick="setLanguage('fr')" title="Français">
+        <img src="flags/de.png" alt="Deutsch" class="language-button" onclick="setLanguage('de')" title="Deutsch">
+        <img src="flags/it.png" alt="Italiano" class="language-button" onclick="setLanguage('it')" title="Italiano">
+        <img src="flags/pt.png" alt="Português" class="language-button" onclick="setLanguage('pt')" title="Português">
+        <img src="flags/nl.png" alt="Nederlands" class="language-button" onclick="setLanguage('nl')" title="Nederlands">
+    </div>
+    <p>Redirecting to CraftMath...</p>
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('Service Worker registered'))
-                .catch(err => console.log('Service Worker registration failed', err));
+        function getPreferredLanguage() {
+            // Check if user has already selected a language
+            const savedLang = localStorage.getItem('craftmath-lang');
+            if (savedLang) {
+                return savedLang;
+            }
+
+            // Get browser languages
+            const browserLangs = navigator.languages || [navigator.language || navigator.userLanguage];
+            
+            // Available languages in our app
+            const availableLangs = ['en', 'pl', 'zh', 'hi', 'es', 'ar', 'bn', 'fr', 'de', 'it', 'pt', 'nl'];
+            
+            // Try to match browser languages with our available languages
+            for (let lang of browserLangs) {
+                lang = lang.split('-')[0].toLowerCase(); // Get primary language code
+                if (availableLangs.includes(lang)) {
+                    return lang;
+                }
+            }
+
+            // Default to English if no match found
+            return 'en';
+        }
+
+        function setLanguage(lang) {
+            localStorage.setItem('craftmath-lang', lang);
+            window.location.href = 'gra.html';
+        }
+
+        function updateActiveButton(lang) {
+            document.querySelectorAll('.language-button').forEach(button => {
+                if (button.alt.toLowerCase().startsWith(lang)) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+        // On page load
+        const preferredLang = getPreferredLanguage();
+        updateActiveButton(preferredLang);
+
+        // If this is not the first visit, redirect immediately
+        if (localStorage.getItem('craftmath-visited')) {
+            setLanguage(preferredLang);
+        } else {
+            // Mark as visited
+            localStorage.setItem('craftmath-visited', 'true');
+            // Redirect after 3 seconds if no language is selected
+            setTimeout(() => {
+                setLanguage(preferredLang);
+            }, 3000);
         }
     </script>
 </body>
