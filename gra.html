@@ -414,6 +414,22 @@
     </style>
 </head>
 <body>
+    <div class="language-dropdown">
+        <select class="language-select" onchange="setLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="pl">Polski</option>
+            <option value="zh">中文</option>
+            <option value="hi">हिंदी</option>
+            <option value="es">Español</option>
+            <option value="ar">العربية</option>
+            <option value="bn">বাংলা</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="it">Italiano</option>
+            <option value="pt">Português</option>
+            <option value="nl">Nederlands</option>
+        </select>
+    </div>
     <div class="game-container" id="game-container">
         <!-- Zostanie wypełnione przez JS -->
     </div>
@@ -422,6 +438,7 @@
         // Get the user's language
         const currentLang = localStorage.getItem('craftmath-lang') || 'en';
         document.documentElement.lang = currentLang;
+        document.querySelector('.language-select').value = currentLang;
 
         // Function to update all text content based on current language
         function updateTexts() {
@@ -439,6 +456,14 @@
 
         // Call updateTexts when DOM is loaded
         document.addEventListener('DOMContentLoaded', updateTexts);
+
+        // Function to handle language changes
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('craftmath-lang', lang);
+            document.documentElement.lang = lang;
+            updateTexts();
+        }
 
         // Zmienne gry
         let currentQuestion = 1;
