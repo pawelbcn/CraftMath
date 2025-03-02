@@ -62,3 +62,15 @@ Stworzone przez [Pawel Marciniak](https://github.com/pawelbcn)
 ## Licencja
 
 Ten projekt jest udostępniany na licencji MIT. Szczegóły w pliku [LICENSE](LICENSE).
+
+## Historia Wersji
+
+### Wersja 1.1 (2 Marca 2024)
+- Usunięto link do GitHub z ekranu głównego
+- Poprawiono układ interfejsu
+
+### Wersja 1.0 (1 Marca 2024)
+- Pierwsza publiczna wersja
+- Implementacja podstawowych funkcji gry
+- Tryb nauki i tryb gry
+- System podpowiedzi i tablica wyników

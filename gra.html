@@ -1,33 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CraftMath: Multiplication Tables</title>
-    <meta name="description" content="Interactive educational game for learning multiplication tables in pixel art style.">
-    <meta name="author" content="Pawel Marciniak">
-    <meta name="theme-color" content="#5c5c5c">
-    <!-- PWA meta tags -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="CraftMath">
-    <!-- PWA icons -->
-    <link rel="apple-touch-icon" href="icons/icon-72x72.png" sizes="72x72">
-    <link rel="apple-touch-icon" href="icons/icon-96x96.png" sizes="96x96">
-    <link rel="apple-touch-icon" href="icons/icon-128x128.png" sizes="128x128">
-    <link rel="apple-touch-icon" href="icons/icon-144x144.png" sizes="144x144">
-    <link rel="apple-touch-icon" href="icons/icon-152x152.png" sizes="152x152">
-    <link rel="apple-touch-icon" href="icons/icon-192x192.png" sizes="192x192">
-    <link rel="apple-touch-icon" href="icons/icon-384x384.png" sizes="384x384">
-    <link rel="apple-touch-icon" href="icons/icon-512x512.png" sizes="512x512">
-    <script src="translations.js"></script>
-    <script>
-        // Set default language to English
-        if (!localStorage.getItem('craftmath-lang')) {
-            localStorage.setItem('craftmath-lang', 'en');
-        }
-    </script>
+    <title>CraftMath: Tabliczka Mnożenia</title>
     <style>
         @font-face {
             font-family: 'PixelFont';
@@ -44,18 +20,24 @@
             text-align: center;
             margin: 0;
             padding: 20px;
-            image-rendering: pixelated;
-            color: white;
-            text-shadow: 2px 2px #000000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .game-container {
+            width: 100%;
             max-width: 800px;
-            margin: 0 auto;
             background-color: #5c5c5c;
-            border: 4px solid #2d2d2d;
             padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid #2d2d2d;
             box-shadow: 0 0 0 4px #7e7e7e;
-            image-rendering: pixelated;
+            position: relative;
         }
         h1 {
             color: #ffff55;
@@ -173,8 +155,10 @@
         }
         /* Style dla ekranu startowego */
         .start-screen {
+            width: 100%;
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .start-screen h2 {
             color: #ffaa00;
@@ -221,16 +205,19 @@
             margin-bottom: 15px;
         }
         .number-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
             gap: 10px;
-            margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 20px;
+            padding: 0 10px;
+            box-sizing: border-box;
         }
         .number-button {
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
+            width: 100%;
+            aspect-ratio: 1;
+            font-size: clamp(16px, 4vw, 24px);
             background-color: #7e7e7e;
             border: 3px solid #5c5c5c;
             color: white;
@@ -238,6 +225,14 @@
             transition: all 0.1s;
             text-shadow: 2px 2px #000000;
             box-shadow: inset -2px -3px 0 1px rgba(0,0,0,0.3);
+        }
+        #number-all {
+            grid-column: 1 / -1;
+            width: 100%;
+            max-width: none;
+            aspect-ratio: auto;
+            padding: 10px;
+            margin-top: 10px;
         }
         .number-button:hover {
             background-color: #a0a0a0;
@@ -264,14 +259,7 @@
             transform: translateY(-2px);
         }
         .game-info {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border: 2px solid #2d2d2d;
-            border-radius: 5px;
-            font-size: 14px;
+            display: none !important;
         }
         .game-info .multiplier {
             font-weight: bold;
@@ -363,142 +351,49 @@
             background-color: #e6af3f;
             transform: translateY(-2px);
         }
-        .github-link {
-            margin-top: 20px;
-            color: #7fcc19;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 5px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 5px;
-        }
-        .github-link:hover {
-            color: #9fec39;
-            text-decoration: underline;
-        }
-        /* Add new styles for language selection */
-        .language-selection-screen {
-            text-align: center;
-            padding: 40px 20px;
-        }
-        
-        .language-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 20px;
-            max-width: 800px;
-            margin: 30px auto;
-            justify-items: center;
-        }
-        
-        .language-option {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            padding: 10px;
-            border: 3px solid transparent;
-            transition: all 0.2s;
-        }
-        
-        .language-option:hover {
-            transform: translateY(-5px);
-        }
-        
-        .language-option.active {
-            border-color: #ffff55;
-            background-color: rgba(255, 255, 85, 0.1);
-        }
-        
-        .language-flag {
-            width: 80px;
-            height: 60px;
-            border: 2px solid #2d2d2d;
-            image-rendering: pixelated;
-        }
-        
-        .language-name {
-            font-size: 16px;
-            color: white;
-            text-shadow: 2px 2px #000000;
-        }
-        
-        .continue-button {
-            margin-top: 30px;
-            padding: 15px 30px;
-            font-family: 'PixelFont', monospace;
-            font-size: 20px;
-            background-color: #546454;
-            border: 4px solid #2d3a2d;
-            color: white;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-shadow: 2px 2px #000000;
-        }
-        
-        .continue-button:hover {
-            background-color: #48a248;
-            transform: translateY(-2px);
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 10px;
+            }
+            .start-screen {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 24px;
+                margin: 10px 0;
+            }
+            h2 {
+                font-size: 20px;
+                margin: 8px 0;
+            }
+            .mode-button {
+                width: 100%;
+                max-width: 300px;
+                margin: 5px auto;
+            }
+            .sets-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+            .set {
+                margin: 5px;
+            }
+            .options-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .option-button {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
         }
     </style>
 </head>
 <body>
     <div class="game-container" id="game-container">
-        <div id="language-selection" class="language-selection-screen">
-            <h1>SELECT LANGUAGE</h1>
-            <div class="language-grid">
-                <div class="language-option" onclick="selectLanguage('en')">
-                    <img src="flags/en.png" alt="English" class="language-flag">
-                    <span class="language-name">English</span>
-                </div>
-                <div class="language-option" onclick="selectLanguage('pl')">
-                    <img src="flags/pl.png" alt="Polski" class="language-flag">
-                    <span class="language-name">Polski</span>
-                </div>
-                <div class="language-option" onclick="selectLanguage('zh')">
-                    <img src="flags/zh.png" alt="中文" class="language-flag">
-                    <span class="language-name">中文</span>
-                </div>
-                <div class="language-option" onclick="selectLanguage('hi')">
-                    <img src="flags/hi.png" alt="हिंदी" class="language-flag">
-                    <span class="language-name">हिंदी</span>
-                </div>
-                <div class="language-option" onclick="selectLanguage('es')">
-                    <img src="flags/es.png" alt="Español" class="language-flag">
-                    <span class="language-name">Español</span>
-                </div>
-                <div class="language-option" onclick="selectLanguage('ar')">
-                    <img src="flags/ar.png" alt="العربية" class="language-flag">
-                    <span class="language-name">العربية</span>
-                </div>
-                <div class="language-option" onclick="selectLanguage('bn')">
-                    <img src="flags/bn.png" alt="বাংলা" class="language-flag">
-                    <span class="language-name">বাংলা</span>
-                </div>
-                <div class="language-option" onclick="selectLanguage('fr')">
-                    <img src="flags/fr.png" alt="Français" class="language-flag">
-                    <span class="language-name">Français</span>
-                </div>
-                <div class="language-option" onclick="selectLanguage('de')">
-                    <img src="flags/de.png" alt="Deutsch" class="language-flag">
-                    <span class="language-name">Deutsch</span>
-                </div>
-                <div class="language-option" onclick="selectLanguage('it')">
-                    <img src="flags/it.png" alt="Italiano" class="language-flag">
-                    <span class="language-name">Italiano</span>
-                </div>
-                <div class="language-option" onclick="selectLanguage('pt')">
-                    <img src="flags/pt.png" alt="Português" class="language-flag">
-                    <span class="language-name">Português</span>
-                </div>
-                <div class="language-option" onclick="selectLanguage('nl')">
-                    <img src="flags/nl.png" alt="Nederlands" class="language-flag">
-                    <span class="language-name">Nederlands</span>
-                </div>
-            </div>
-            <button class="continue-button" onclick="startGame()">CONTINUE</button>
-        </div>
+        <!-- Zostanie wypełnione przez JS -->
     </div>
 
     <script>
@@ -508,6 +403,7 @@
         let totalQuestions = 10;
         let gameMode = 'learning'; // learning lub game
         let multiplier = 4; // domyślny mnożnik
+        let useRandomNumbers = false; // czy używać losowych liczb w trybie gry
         let usedNumbers = []; // Tablica używana w trybie losowym
         let currentScreen = 'start'; // start, multiplier-select, game, leaderboard
         let hintsVisible = false; // Czy podpowiedzi (zbiory) są widoczne
@@ -515,48 +411,8 @@
         
         // Dźwięki
         const correctSound = new Audio("data:audio/wav;base64,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");
-        const wrongSound = new Audio("data:audio/wav;base64,UklGRswCAABXQVZFZm10IBAAAAABAAEARKwAAESsAAACABAAZGF0YagCAAAiIiIpKSkzMzM+Pj5ISEhQUFBWVlZaWlpeXl5gYGBiYmJiYmJiYmJhYWFgYGBeXl5cXFxZWVlVVVVRUVFMTExGRkZAQEA5OTkyMjIrKyskJCQeHh4YGBgSEhINDQ0ICAgFBQUCAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgIFBQUICAgNDQ0SEhIYGBgeHh4kJCQrKysyMjI5OTlAQEBGRkZMTExRUVFVVVVZWVlcXFxeXl5gYGBhYWFiYmJiYmJiYmJgYGBeXl5aWlpWVlZQUFBISEg+Pj4zMzMpKSkiIiIcHBwVFRUPDw8KCgoGBgYDAwMBAQEAAAAAAAAAAAAAAAAAAAAAAAABAQEDAwMGBgYKCgoPDw8VFRUcHBwiIiIpKSkzMzM+Pj5ISEhQUFBWVlZaWlpeXl5gYGBiYmJiYmJiYmJhYWFgYGBeXl5cXFxZWVlVVVVRUVFMTExGRkZAQEA5OTkyMjIrKyskJCQeHh4YGBgSEhINDQ0ICAgFBQUCAgIAAAAAAAAAAAAAAAAAAAAAAAACAgIFBQUICAgNDQ0SEhIYGBgeHh4kJCQrKysyMjI5OTlAQEBGRkZMTExRUVFVVVVZWVlcXFxeXl5gYGBhYWFiYmJiYmJiYmJgYGBeXl5aWlpWVlZQUFBISEg+Pj4zMzMpKSkiIiIcHBwVFRUPDw8KCgoGBgYDAwMBAQEAAAAAAAAAAAAAAAAAAAAAAAABAQEDAwMGBgYKCgoPDw8VFRX/////////////////////");
-        const clickSound = new Audio("data:audio/wav;base64,UklGRswCAABXQVZFZm10IBAAAAABAAEARKwAAESsAAACABAAZGF0YagCAAAiIiIpKSkzMzM+Pj5ISEhQUFBWVlZaWlpeXl5gYGBiYmJiYmJiYmJhYWFgYGBeXl5cXFxZWVlVVVVRUVFMTExGRkZAQEA5OTkyMjIrKyskJCQeHh4YGBgSEhINDQ0ICAgFBQUCAgIAAAAAAAAAAAAAAAAAAAAAAAACAgIFBQUICAgNDQ0SEhIYGBgeHh4kJCQrKysyMjI5OTlAQEBGRkZMTExRUVFVVVVZWVlcXFxeXl5gYGBhYWFiYmJiYmJiYmJgYGBeXl5aWlpWVlZQUFBISEg+Pj4zMzMpKSkiIiIcHBwVFRUPDw8KCgoGBgYDAwMBAQEAAAAAAAAAAAAAAAAAAAAAAAABAQEDAwMGBgYKCgoPDw8VFRX/////////////////////");
-
-        // Add language selection functionality
-        let currentLang = localStorage.getItem('craftmath-lang') || 'en';
-        
-        function selectLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('craftmath-lang', lang);
-            updateLanguageSelection();
-            updateAllTexts();
-        }
-        
-        function updateLanguageSelection() {
-            document.querySelectorAll('.language-option').forEach(option => {
-                const langCode = option.querySelector('img').alt.toLowerCase().split(' ')[0];
-                if (langCode === currentLang) {
-                    option.classList.add('active');
-                } else {
-                    option.classList.remove('active');
-                }
-            });
-        }
-        
-        function startGame() {
-            document.getElementById('language-selection').style.display = 'none';
-            document.getElementById('start-screen').style.display = 'block';
-            updateAllTexts();
-        }
-        
-        function updateAllTexts() {
-            // Update all text elements with translations
-            document.title = translations[currentLang].title;
-            // Update other text elements...
-        }
-        
-        // Initialize language selection
-        window.onload = function() {
-            document.getElementById('start-screen').style.display = 'none';
-            updateLanguageSelection();
-            updateAllTexts();
-        };
+        const wrongSound = new Audio("data:audio/wav;base64,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");
+        const clickSound = new Audio("data:audio/wav;base64,UklGRswCAABXQVZFZm10IBAAAAABAAEARKwAAESsAAACABAAZGF0YagCAAAiIiIpKSkzMzM+Pj5ISEhQUFBWVlZaWlpeXl5gYGBiYmJiYmJiYmJhYWFgYGBeXl5cXFxZWVlVVVVRUVFMTExGRkZAQEA5OTkyMjIrKyskJCQeHh4YGBgSEhINDQ0ICAgFBQUCAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgIFBQUICAgNDQ0SEhIYGBgeHh4kJCQrKysyMjI5OTlAQEBGRkZMTExRUVFVVVVZWVlcXFxeXl5gYGBhYWFiYmJiYmJiYmJgYGBeXl5aWlpWVlZQUFBISEg+Pj4zMzMpKSkiIiIcHBwVFRUPDw8KCgoGBgYDAwMBAQEAAAAAAAAAAAAAAAAAAAAAAAABAQEDAwMGBgYKCgoPDw8VFRUcHBwiIiIpKSkzMzM+Pj5ISEhQUFBWVlZaWlpeXl5gYGBiYmJiYmJiYmJhYWFgYGBeXl5cXFxZWVlVVVVRUVFMTExGRkZAQEA5OTkyMjIrKyskJCQeHh4YGBgSEhINDQ0ICAgFBQUCAgIAAAAAAAAAAAAAAAAAAAAAAAACAgIFBQUICAgNDQ0SEhIYGBgeHh4kJCQrKysyMjI5OTlAQEBGRkZMTExRUVFVVVVZWVlcXFxeXl5gYGBhYWFiYmJiYmJiYmJgYGBeXl5aWlpWVlZQUFBISEg+Pj4zMzMpKSkiIiIcHBwVFRUPDw8KCgoGBgYDAwMBAQEAAAAAAAAAAAAAAAAAAAAAAAABAQEDAwMGBgYKCgoPDw8VFRX/////////////////////");
 
         // Renderuj ekran startowy
         function renderStartScreen() {
@@ -564,11 +420,11 @@
             container.innerHTML = `
                 <div class="start-screen">
                     <div class="minecraft-logo">CRAFTMATH</div>
-                    <h1>${translations[currentLang].title}</h1>
-                    <h2>${translations[currentLang].chooseModeTitle}</h2>
-                    <button id="learning-mode" class="mode-button">${translations[currentLang].learningMode}</button>
-                    <button id="game-mode" class="mode-button">${translations[currentLang].gameMode}</button>
-                    <button id="show-leaderboard" class="mode-button">${translations[currentLang].leaderboard}</button>
+                    <h1>TABLICZKA MNOŻENIA</h1>
+                    <h2>Wybierz tryb gry:</h2>
+                    <button id="learning-mode" class="mode-button">TRYB NAUKI</button>
+                    <button id="game-mode" class="mode-button">TRYB GRY</button>
+                    <button id="show-leaderboard" class="mode-button">TABLICA WYNIKÓW</button>
                 </div>
             `;
             
@@ -583,8 +439,8 @@
             document.getElementById('game-mode').addEventListener('click', () => {
                 clickSound.play();
                 gameMode = 'game';
-                currentScreen = 'game';
-                resetGame();
+                currentScreen = 'multiplier-select';
+                renderMultiplierScreen();
             });
             
             document.getElementById('show-leaderboard').addEventListener('click', () => {
@@ -602,24 +458,28 @@
             const container = document.getElementById('game-container');
             container.innerHTML = `
                 <div class="start-screen">
-                    <h1>${translations[currentLang].learningMode}</h1>
+                    <h1>${gameMode === 'learning' ? 'TRYB NAUKI' : 'TRYB GRY'}</h1>
                     <div class="multiplier-selection">
-                        <h3>${translations[currentLang].chooseMultiplier}</h3>
+                        <h3>Wybierz liczbę do nauki mnożenia:</h3>
                         <div class="number-grid">
                             ${generateNumberButtons()}
+                            ${gameMode === 'game' ? '<button id="number-all" class="number-button">WSZYSTKIE</button>' : ''}
                         </div>
                     </div>
-                    <button id="start-learning" class="mode-button">${translations[currentLang].startLearning}</button>
-                    <button id="back-to-start" class="back-button">${translations[currentLang].backToStart}</button>
+                    <button id="start-game" class="mode-button">ROZPOCZNIJ ${gameMode === 'learning' ? 'NAUKĘ' : 'GRĘ'}</button>
+                    <button id="back-to-start" class="back-button">POWRÓT</button>
                 </div>
             `;
             
             // Zaznacz aktualnie wybrany mnożnik
-            document.getElementById(`number-${multiplier}`).classList.add('active');
+            if (multiplier > 0 && multiplier <= 10 && !useRandomNumbers) {
+                document.getElementById(`number-${multiplier}`).classList.add('active');
+            }
             
             // Dodaj nasłuchiwacze zdarzeń dla przycisków liczbowych
             for (let i = 1; i <= 10; i++) {
                 document.getElementById(`number-${i}`).addEventListener('click', () => {
+                    clickSound.play();
                     // Usuń aktywną klasę z poprzedniego przycisku
                     document.querySelectorAll('.number-button').forEach(btn => {
                         btn.classList.remove('active');
@@ -628,13 +488,30 @@
                     // Dodaj aktywną klasę do nowego przycisku
                     document.getElementById(`number-${i}`).classList.add('active');
                     multiplier = i;
+                    useRandomNumbers = false;
+                });
+            }
+
+            // Dodaj nasłuchiwacz dla przycisku WSZYSTKIE w trybie gry
+            if (gameMode === 'game') {
+                document.getElementById('number-all').addEventListener('click', () => {
                     clickSound.play();
+                    // Usuń aktywną klasę z wszystkich przycisków
+                    document.querySelectorAll('.number-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    document.getElementById('number-all').classList.add('active');
+                    useRandomNumbers = true;
                 });
             }
             
-            // Nasłuchiwacz dla przycisku rozpoczęcia nauki
-            document.getElementById('start-learning').addEventListener('click', () => {
+            // Nasłuchiwacz dla przycisku rozpoczęcia gry
+            document.getElementById('start-game').addEventListener('click', () => {
                 clickSound.play();
+                if (!useRandomNumbers && multiplier === 0) {
+                    alert('Wybierz liczbę do nauki lub opcję WSZYSTKIE!');
+                    return;
+                }
                 currentScreen = 'game';
                 resetGame();
             });
@@ -679,10 +556,15 @@
             const modeText = gameMode === 'learning' ? 'Tryb Nauki' : 'Tryb Gry';
             
             container.innerHTML = `
-                <h1>${translations[currentLang].title}</h1>
-                <div class="question-container">${translations[currentLang].howMuch} <span id="number">1</span> × <span id="multiplier-display">${multiplier}</span> = ?</div>
-                <div class="equation ${gameMode === 'game' ? 'hidden' : ''}">${translations[currentLang].setsOf.replace('{0}', '<span id="sets-count">1</span>').replace('{1}', '<span id="dots-count">${multiplier}</span>')}</div>
-                ${gameMode === 'game' ? '<button id="hint-button" class="hint-button">${translations[currentLang].showHint}</button>' : ''}
+                <div class="game-info">
+                    <div>Tryb: <span class="mode">${modeText}</span></div>
+                    ${gameMode === 'learning' ? `<div>Mnożenie przez: <span class="multiplier">${multiplier}</span></div>` : ''}
+                </div>
+                
+                <h1>CRAFTMATH: TABLICZKA MNOŻENIA</h1>
+                <div class="question-container">Ile to <span id="number">1</span> × <span id="multiplier-display">${multiplier}</span> = ?</div>
+                <div class="equation ${gameMode === 'game' ? 'hidden' : ''}"><span id="sets-count">1</span> zbiorów po <span id="dots-count">${multiplier}</span> kropki</div>
+                ${gameMode === 'game' ? '<button id="hint-button" class="hint-button">POKAŻ PODPOWIEDŹ</button>' : ''}
                 <div class="sets-container ${gameMode === 'game' ? 'hidden' : ''}" id="sets-container"></div>
                 <div class="options-container" id="options"></div>
                 <div class="message" id="message"></div>
@@ -690,7 +572,7 @@
                 <div class="progress-container">
                     <div class="progress-bar" id="progress-bar"></div>
                 </div>
-                <button id="back-to-menu" class="back-button">${translations[currentLang].backToMenu}</button>
+                <button id="back-to-menu" class="back-button">POWRÓT DO MENU</button>
             `;
             
             // Dodaj nasłuchiwacz dla przycisku powrotu
@@ -712,11 +594,11 @@
                     if (hintsVisible) {
                         setsContainer.classList.remove('hidden');
                         equation.classList.remove('hidden');
-                        hintButton.textContent = '${translations[currentLang].hideHint}';
+                        hintButton.textContent = 'UKRYJ PODPOWIEDŹ';
                     } else {
                         setsContainer.classList.add('hidden');
                         equation.classList.add('hidden');
-                        hintButton.textContent = '${translations[currentLang].showHint}';
+                        hintButton.textContent = 'POKAŻ PODPOWIEDŹ';
                     }
                 });
             }
@@ -729,30 +611,47 @@
         
         // Reset gry
         function resetGame() {
+            score = 0;
+            usedNumbers = [];
+            hintsVisible = false;
+            
             if (gameMode === 'learning') {
                 currentQuestion = 1;
+                const setsContainer = document.getElementById('sets-container');
+                const equation = document.querySelector('.equation');
+                if (setsContainer) setsContainer.classList.remove('hidden');
+                if (equation) equation.classList.remove('hidden');
             } else { // game mode
-                currentQuestion = getRandomNumber();
-                usedNumbers = [currentQuestion];
-                hintsVisible = false; // Resetuj stan podpowiedzi w trybie gry
+                if (useRandomNumbers) {
+                    currentQuestion = Math.floor(Math.random() * 9) + 2; // Start with 2-10
+                    multiplier = getRandomNumber(); // Set initial multiplier
+                    usedNumbers = [currentQuestion, multiplier];
+                } else {
+                    currentQuestion = Math.floor(Math.random() * 9) + 2;
+                    usedNumbers = [currentQuestion];
+                }
+                const setsContainer = document.getElementById('sets-container');
+                const equation = document.querySelector('.equation');
+                if (setsContainer) setsContainer.classList.add('hidden');
+                if (equation) equation.classList.add('hidden');
             }
             
-            score = 0;
             renderGameScreen();
             updateProgress();
         }
         
-        // Funkcja do generowania losowej liczby (1-10) bez powtórzeń
+        // Funkcja do generowania losowej liczby (2-10) bez powtórzeń
         function getRandomNumber() {
-            if (usedNumbers.length >= 10) {
-                usedNumbers = []; // Wszystkie liczby zostały użyte, resetuj
+            if (usedNumbers.length >= 9) { // Użyto już wszystkich liczb (2-10)
+                usedNumbers = []; // Resetuj tablicę
             }
             
             let randomNum;
             do {
-                randomNum = Math.floor(Math.random() * 10) + 1;
+                randomNum = Math.floor(Math.random() * 9) + 2; // 2-10
             } while (usedNumbers.includes(randomNum));
             
+            usedNumbers.push(randomNum);
             return randomNum;
         }
         
@@ -773,26 +672,26 @@
             document.getElementById('number').textContent = currentQuestion;
             document.getElementById('sets-count').textContent = currentQuestion;
             
-            // W trybie gry, losowo wybieramy mnożnik dla każdego pytania
-            if (gameMode === 'game') {
-                const randomMultiplier = Math.floor(Math.random() * 9) + 2; // 2-10
-                multiplier = randomMultiplier;
-                document.getElementById('multiplier-display').textContent = multiplier;
-                document.getElementById('dots-count').textContent = multiplier;
-                
-                // Usuń wszystkie kropki z istniejących zbiorów
-                const sets = document.querySelectorAll('.set');
-                sets.forEach(set => {
-                    set.innerHTML = '';
-                    
-                    // Dodaj nową liczbę kropek odpowiadającą mnożnikowi
-                    for (let i = 0; i < multiplier; i++) {
-                        const dot = document.createElement('div');
-                        dot.classList.add('dot');
-                        set.appendChild(dot);
-                    }
-                });
+            // W trybie gry z losowymi liczbami, losuj nowy mnożnik
+            if (useRandomNumbers) {
+                multiplier = getRandomNumber();
             }
+            
+            document.getElementById('multiplier-display').textContent = multiplier;
+            if (document.getElementById('dots-count')) {
+                document.getElementById('dots-count').textContent = multiplier;
+            }
+            
+            // Aktualizuj kropki w zbiorach
+            const sets = document.querySelectorAll('.set');
+            sets.forEach(set => {
+                set.innerHTML = '';
+                for (let i = 0; i < multiplier; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    set.appendChild(dot);
+                }
+            });
         }
         
         // Renderowanie opcji odpowiedzi
@@ -834,8 +733,11 @@
             const message = document.getElementById('message');
             if (!message) return;
             
+            const setsContainer = document.getElementById('sets-container');
+            const equation = document.querySelector('.equation');
+            
             if (selectedOption === correctAnswer) {
-                message.textContent = '${translations[currentLang].correctAnswer}';
+                message.textContent = 'Brawo! Dobra odpowiedź!';
                 message.style.color = 'green';
                 score++;
                 correctSound.play();
@@ -845,44 +747,41 @@
                 sets.forEach(set => {
                     set.style.backgroundColor = '#68b337';
                     set.style.borderColor = '#3a6b15';
-                    // Dodaj efekt dźwiękowy "pop" w stylu Minecraft
-                    const popSound = new Audio("data:audio/wav;base64,UklGRqwCAABXQVZFZm10IBAAAAABAAEARKwAABCxAgAEABAAZGF0YYgCAACAgICAgICAgICAgICAgICAgICAgICAgICBgYGCgoKCg4ODg4SEhIWFhYaGhoeHh4iIiImJiYqKiouLi4yMjI2NjY6Ojo+Pj5CQkJGRkZGSkpKTk5OTlJSUlZWVlZaWlpeXl5eYmJiZmZmampqam5ubnJycnZ2dnZ6enp+fn6CgoKGhoaKioqOjo6SkpKWlpaampqenp6ioqKmpqaqqqqurq6usrK2tra6urq+vr7CwsLGxsbKysrOzs7S0tLW1tba2tre3t7i4uLm5ubq6uru7u7y8vL29vb6+vr+/v8DAwMHBwcLCwsPDw8TExMXFxcbGxsfHx8fIyMjIycnJycrKysrLy8vLzMzMzM3Nzc3Ozs7Oz8/Pz9DQ0NDR0dHR0tLS0tPT09PU1NTU1dXV1dbW1tbX19fX2NjY2NnZ2dna2trb29vb3Nzc3N3d3d3e3t7e39/f3+Dg4ODh4eHh4uLi4uPj4+Pk5OTk5eXl5ebm5ubn5+fn6Ojo6Onp6enq6urq6+vr6+zs7Ozt7e3t7u7u7u/v7+/w8PDw8fHx8fLy8vLz8/Pz9PT09PX19fX29vb29/f39/j4+Pj5+fn5+vr6+vv7+/v8/Pz8/f39/f7+/v7///////////////////////////////////////////8=");
-                    popSound.volume = 0.3;
-                    popSound.play();
                 });
                 
-                // Jeśli jesteśmy w trybie gry, pokażmy zbiory na moment a potem ukryjmy z powrotem
+                // W trybie gry pokazujemy zbiory tylko jeśli są włączone podpowiedzi
                 if (gameMode === 'game' && !hintsVisible) {
-                    const setsContainer = document.getElementById('sets-container');
-                    const equation = document.querySelector('.equation');
-                    
-                    setsContainer.classList.remove('hidden');
-                    equation.classList.remove('hidden');
-                    
-                    setTimeout(() => {
-                        setsContainer.classList.add('hidden');
-                        equation.classList.add('hidden');
-                    }, 1500);
+                    // Nie pokazujemy zbiorów automatycznie po poprawnej odpowiedzi
+                    // Użytkownik musi użyć przycisku POKAŻ PODPOWIEDŹ
+                    if (setsContainer) setsContainer.classList.add('hidden');
+                    if (equation) equation.classList.add('hidden');
                 }
                 
                 setTimeout(() => {
                     updateStars();
-                    // Dodaj efekt dźwiękowy "doświadczenie" w stylu Minecraft
-                    const xpSound = new Audio("data:audio/wav;base64,UklGRpYBAABXQVZFZm10IBAAAAABAAEARKwAAESsAAACABAAZGF0YXIBAABJSUlWVlZjY2NwcHB9fX2IiIiSkpKampqgoKCjo6OkpKSjo6OgoKCbm5uVlZWNjY2EhIR7e3tycnJqampjY2NdXV1XV1dTU1NPT09NTU1MTExNTU1PT09SUlJWVlZbW1thYWFnZ2dtbW1zc3N4eHh8fHx/f3+AgIB/f39+fn57e3t3d3dycnJsbGxmZmZfX19ZWVlTU1NNTUilpaWsrKyzs7O5ubm+vr7BwcHDw8PExMTDw8PCwsK/v7+7u7u3t7exsbGqqqmjo6Obm5uTk5OLi4uDg4N8fHx2dnZxcXFtbW1qampnZ2dlZWVlZWVmZmZoaGhqampubm5xcXF1dXV4eHh7e3t9fX1/f3+AgICAf39/f39+fn58fHx5eXl2dnZycnJubm5qampkZGRe");
-                    xpSound.volume = 0.5;
-                    xpSound.play();
                     updateProgress();
                     
                     if (score < totalQuestions) {
-                        // Wybierz następne pytanie w zależności od trybu
                         if (gameMode === 'learning') {
                             currentQuestion++;
                             if (currentQuestion > 10) {
                                 currentQuestion = 1;
                             }
                         } else { // game mode
-                            currentQuestion = getRandomNumber();
-                            usedNumbers.push(currentQuestion);
+                            if (useRandomNumbers) {
+                                currentQuestion = Math.floor(Math.random() * 9) + 2;
+                                multiplier = getRandomNumber();
+                                while (usedNumbers.includes(currentQuestion)) {
+                                    currentQuestion = Math.floor(Math.random() * 9) + 2;
+                                }
+                                usedNumbers.push(currentQuestion);
+                            } else {
+                                currentQuestion = Math.floor(Math.random() * 9) + 2;
+                                while (usedNumbers.includes(currentQuestion)) {
+                                    currentQuestion = Math.floor(Math.random() * 9) + 2;
+                                }
+                                usedNumbers.push(currentQuestion);
+                            }
                         }
                         
                         renderSets();
@@ -893,7 +792,6 @@
                     }
                 }, 1500);
             } else {
-                message.textContent = '${translations[currentLang].wrongAnswer}';
                 message.textContent = 'Spróbuj jeszcze raz!';
                 message.style.color = 'red';
                 wrongSound.play();
@@ -903,11 +801,6 @@
                 sets.forEach(set => {
                     set.style.backgroundColor = '#a12722';
                     set.style.borderColor = '#700000';
-                    
-                    // Dodaj efekt dźwiękowy "uszkodzenie" w stylu Minecraft
-                    const damageSound = new Audio("data:audio/wav;base64,UklGRt4DAABXQVZFZm10IBAAAAABAAEARKwAAESsAAACABAAZGF0YboDAABsbm5sbGxra2tra2pqampqaWlpaWhoaGhoZ2dnZ2dmZmZmZmZlZWVlZWRkZGRkY2NjY2NiYmJiYmJhYWFhYWFgYGBgYGBfX19fX19eXl5eXl1dXV1dXVxcXFxcW1tbW1taWlpaWllZWVlZWVhYWFhYV1dXV1dWVlZWVlZVVVVVVVVUVFRUVFNTU1NTU1JSUlJSUlFRUVFRUVBQUFBQT09PT09PTk5OTk5OTU1NTU1NTExMTExMS0tLS0tLSkpKSkpKSUlJSUlJSEhISEhIR0dHR0dHRkZGRkZGRUVFRUVFRERERERDQ0NDQ0NCQkJCQkJBQUFBQUFAQEBAQEA/Pz8/Pz8+Pj4+Pj49PT09PT08PDw8PDw7Ozs7Ozs6Ojo6Ojo5OTk5OTk4ODg4ODg3Nzc3Nzc2NjY2NjY1NTU1NTU0NDQ0NDQzMzMzMzMyMjIyMjIxMTExMTExMDAwMDAwLy8vLy8vLi4uLi4uLS0tLS0tLCwsLCwsKysrKysrKioqKioqKSkpKSkpKCgoKCgoJycnJycnJiYmJiYmJSUlJSUlJCQkJCQkIyMjIyMjIiIiIiIiISEhISEhICAgICAgHx8fHx8fHh4eHh4eHR0dHR0dHBwcHBwcGxsbGxsbGhoaGhoaGRkZGRkZGBgYGBgYFxcXFxcXFhYWFhYWFRUVFRUVFBQUFBQUExMTExMTEhISEhISEREREREREBAQEBAQDw8PDw8PDg4ODg4ODQ0NDQ0NDAwMDAwMCwsLCwsLCgoKCgoKCQkJCQkJCAgICAgIBwcHBwcHBgYGBgYGBQUFBQUFBAQEBAQEAwMDAwMDAgICAgICAQEBAQEBAAAAAAAAf39/f39/fn5+fn5+fX19fX19fHx8fHx8e3t7e3t7enp6enp6eXl5eXl5eHh4eHh4d3d3d3d3dnZ2dnZ2dXV1dXV1dHR0dHR0c3Nzc3Nzc3Jycm9wcG5wcG9wcHFycnJzc3N0dHR1dXV2dnZ3d3d4eHh4eXl5enp6e3t7e3x8fH19fX5+fn9/f4CAgIGBgYKCgoODg4SEhIWFhYaGhoeHh4iIiImJiYqKiouLi4yMjI2NjY6Ojo+Pj5CQkJGRkZKSkpOTk5SUlJWVlZaWlpeXl5iYmJmZmZqampubm5ycnJ2dnZ6enp+fn6CgoKGhoaKioqOjo6SkpKWlpaampqenp6ioqKmpqaqqqqurq6ysrK2tra6urq+vr7CwsLGxsbKysrOzs7S0tLW1tba2tre3t7i4uLm5ubq6uru7u7y8vL29vb6+vr+/v8DAwMHBwcLCwsPDw8TExMXFxcbGxsfHx8jIyA==");
-                    damageSound.volume = 0.3;
-                    damageSound.play();
                     
                     setTimeout(() => {
                         set.style.backgroundColor = '#ce9c0e';
@@ -1141,26 +1034,26 @@
             
             container.innerHTML = `
                 <div class="start-screen">
-                    <h1>${translations[currentLang].leaderboardTitle}</h1>
+                    <h1>TABLICA WYNIKÓW</h1>
                     <div class="leaderboard-container">
-                        <div class="leaderboard-title">${translations[currentLang].bestScores}</div>
+                        <div class="leaderboard-title">Najlepsze wyniki</div>
                         <table class="leaderboard-table">
                             <thead>
                                 <tr>
-                                    <th>${translations[currentLang].rank}</th>
-                                    <th>${translations[currentLang].player}</th>
-                                    <th>${translations[currentLang].score}</th>
-                                    <th>${translations[currentLang].mode}</th>
-                                    <th>${translations[currentLang].multiplier}</th>
-                                    <th>${translations[currentLang].date}</th>
+                                    <th>Lp.</th>
+                                    <th>Gracz</th>
+                                    <th>Punkty</th>
+                                    <th>Tryb</th>
+                                    <th>Mnożnik</th>
+                                    <th>Data</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                ${tableContent || `<tr><td colspan="6" style="text-align: center;">${translations[currentLang].noScores}</td></tr>`}
+                                ${tableContent || '<tr><td colspan="6" style="text-align: center;">Brak zapisanych wyników</td></tr>'}
                             </tbody>
                         </table>
                     </div>
-                    <button id="back-to-menu" class="back-button">${translations[currentLang].backToMenu}</button>
+                    <button id="back-to-menu" class="back-button">POWRÓT DO MENU</button>
                 </div>
             `;
             
@@ -1174,12 +1067,6 @@
 
         // Inicjalizacja gry - rozpocznij od ekranu startowego
         renderStartScreen();
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('Service Worker registered'))
-                .catch(err => console.log('Service Worker registration failed', err));
-        }
     </script>
 </body>
 </html>
