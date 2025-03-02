@@ -390,49 +390,45 @@
                 margin: 0 auto;
             }
         }
-        .language-selector {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .language-dropdown {
             position: fixed;
             top: 10px;
             right: 10px;
-            background: rgba(92, 92, 92, 0.9);
-            padding: 10px;
-            border: 2px solid #2d2d2d;
-            border-radius: 5px;
+            z-index: 1000;
         }
-        .language-button {
-            width: 32px;
-            height: 24px;
+        .language-select {
+            font-family: 'PixelFont', monospace;
+            padding: 8px;
+            background-color: #5c5c5c;
+            color: white;
+            border: 2px solid #2d2d2d;
             cursor: pointer;
-            border: 2px solid #2d2d2d;
-            transition: transform 0.2s;
+            text-shadow: 1px 1px #000000;
+            min-width: 120px;
         }
-        .language-button:hover {
-            transform: scale(1.1);
+        .language-select option {
+            background-color: #5c5c5c;
+            color: white;
+            padding: 8px;
         }
     </style>
 </head>
 <body>
-    <div class="language-selector">
-        <img src="flags/en.png" alt="English" class="language-button" onclick="setLanguage('en')" title="English">
-        <img src="flags/pl.png" alt="Polski" class="language-button" onclick="setLanguage('pl')" title="Polski">
-        <img src="flags/zh.png" alt="中文" class="language-button" onclick="setLanguage('zh')" title="中文">
-        <img src="flags/hi.png" alt="हिंदी" class="language-button" onclick="setLanguage('hi')" title="हिंदी">
-        <img src="flags/es.png" alt="Español" class="language-button" onclick="setLanguage('es')" title="Español">
-        <img src="flags/ar.png" alt="العربية" class="language-button" onclick="setLanguage('ar')" title="العربية">
-        <img src="flags/bn.png" alt="বাংলা" class="language-button" onclick="setLanguage('bn')" title="বাংলা">
-        <img src="flags/fr.png" alt="Français" class="language-button" onclick="setLanguage('fr')" title="Français">
-        <img src="flags/de.png" alt="Deutsch" class="language-button" onclick="setLanguage('de')" title="Deutsch">
-        <img src="flags/it.png" alt="Italiano" class="language-button" onclick="setLanguage('it')" title="Italiano">
-        <img src="flags/pt.png" alt="Português" class="language-button" onclick="setLanguage('pt')" title="Português">
-        <img src="flags/nl.png" alt="Nederlands" class="language-button" onclick="setLanguage('nl')" title="Nederlands">
+    <div class="language-dropdown">
+        <select class="language-select" onchange="setLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="pl">Polski</option>
+            <option value="zh">中文</option>
+            <option value="hi">हिंदी</option>
+            <option value="es">Español</option>
+            <option value="ar">العربية</option>
+            <option value="bn">বাংলা</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="it">Italiano</option>
+            <option value="pt">Português</option>
+            <option value="nl">Nederlands</option>
+        </select>
     </div>
     <div class="game-container" id="game-container">
         <!-- Zostanie wypełnione przez JS -->
@@ -442,6 +438,7 @@
         // Get the user's language
         const currentLang = localStorage.getItem('craftmath-lang') || 'en';
         document.documentElement.lang = currentLang;
+        document.querySelector('.language-select').value = currentLang;
 
         // Function to update all text content based on current language
         function updateTexts() {
