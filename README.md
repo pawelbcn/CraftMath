@@ -65,6 +65,12 @@ Ten projekt jest udostępniany na licencji MIT. Szczegóły w pliku [LICENSE](LI
 
 ## Historia Wersji
 
+### Wersja 1.3 (2 Marca 2024)
+- Poprawiono wyświetlanie wyników końcowych
+- Naprawiono błędy z "undefined" w tablicy wyników
+- Ulepszono system zapisywania wyników
+- Dodano wsparcie dla wielu języków w tablicy wyników
+
 ### Wersja 1.1 (2 Marca 2024)
 - Usunięto link do GitHub z ekranu głównego
 - Poprawiono układ interfejsu

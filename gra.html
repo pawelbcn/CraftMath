@@ -931,7 +931,7 @@
             }
             
             // Score summary
-            messageText = `${messageText}<br>${translations[currentLang].yourScore}: ${score} ${translations[currentLang].outOf} ${totalQuestions}!`;
+            messageText = translations[currentLang].finalScore.replace('{score}', score).replace('{total}', totalQuestions);
             message.innerHTML = messageText;
             
             // Score form
@@ -1081,14 +1081,14 @@
         // Renderuj ekran tablicy wyników
         function renderLeaderboard() {
             const container = document.getElementById('game-container');
-            const scores = JSON.parse(localStorage.getItem('craftmath-scores')) || [];
+            const scores = JSON.parse(localStorage.getItem('craftMathLeaderboard')) || [];
             
             let html = `
                 <div class="leaderboard">
                     <h1>${translations[currentLang].leaderboardTitle}</h1>
                     ${scores.length === 0 ? 
                         `<p>${translations[currentLang].noScores}</p>` :
-                        `<table>
+                        `<table class="leaderboard-table">
                             <tr>
                                 <th>${translations[currentLang].rank}</th>
                                 <th>${translations[currentLang].player}</th>
@@ -1102,9 +1102,9 @@
                                     <td>${index + 1}</td>
                                     <td>${score.name}</td>
                                     <td>${score.score}</td>
-                                    <td>${score.mode === 'learning' ? translations[currentLang].learningMode : translations[currentLang].gameMode}</td>
-                                    <td>${score.mode === 'game' ? translations[currentLang].mix : 'x' + score.multiplier}</td>
-                                    <td>${new Date(score.date).toLocaleDateString()}</td>
+                                    <td>${score.mode}</td>
+                                    <td>${score.multiplier}</td>
+                                    <td>${score.date}</td>
                                 </tr>
                             `).join('')}
                         </table>`
